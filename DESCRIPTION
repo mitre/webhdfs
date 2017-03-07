@@ -1,9 +1,11 @@
 Package: webhdfs
-Title: What the Package Does (one line, title case)
+Title: Interface with WebHDFS Service in a Cluster-Neutral Way
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Brendan", "Hogan", email = "bhogan@mitre.org", role = c("aut", "cre"))
+Description: Provide an interface to WebHDFS operations by leveraging configuration 
+details from the clusterconf package.
 Depends: R (>= 3.3.2)
-License: What license is it under?
+Imports: clusterconf
+License: MITRE
 Encoding: UTF-8
 LazyData: true
