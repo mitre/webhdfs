@@ -25,4 +25,9 @@ Generic function to perform HTTP GET request of a WebHDFS operation
 hdfs_get("/data/raw/tma/SCHEDL", "LISTSTATUS")
 
 }
+\seealso{
+\url{http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/WebHDFS.html}
+  for documentation of WebHDFS REST API commands that can be passed to the
+  \code{operation} parameter
+}
 

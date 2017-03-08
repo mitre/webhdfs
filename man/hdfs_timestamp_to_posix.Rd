@@ -7,7 +7,8 @@
 hdfs_timestamp_to_posix(x)
 }
 \arguments{
-\item{x}{Numeric, milliseconds since January 1, 1970 UTC}
+\item{x}{Numeric, milliseconds since January 1, 1970 UTC.  Will accept a
+character that can be converted to numeric.}
 }
 \value{
 POSIXct formatted timestamp

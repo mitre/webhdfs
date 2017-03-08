@@ -7,7 +7,10 @@ Description: Provide an interface to WebHDFS operations by leveraging
 Depends:
     R (>= 3.3.2)
 Imports:
-    clusterconf
+    clusterconf,
+    jsonlite,
+    RCurl
+Suggests: testthat
 License: MITRE
 Encoding: UTF-8
 LazyData: true
