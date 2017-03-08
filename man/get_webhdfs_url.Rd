@@ -2,11 +2,11 @@
 % Please edit documentation in R/namenode_utilities.R
 \name{get_webhdfs_url}
 \alias{get_webhdfs_url}
-\title{Title}
+\title{Build URL for WebHDFS}
 \usage{
 get_webhdfs_url()
 }
 \description{
-Title
+Build URL for WebHDFS
 }
 

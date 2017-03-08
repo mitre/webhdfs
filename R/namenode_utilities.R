@@ -1,17 +1,22 @@
 
 
 
-#' Title
+#' Build URL for WebHDFS
 #'
-#' @import clusterconf
 #' @return
 #' @export
 #'
 #' @examples
 get_webhdfs_url <- function() {
-  nn <- get_name_node_url()
 
-  # pending change to config yaml
+  # webhdfs base url from namenode
+  nn <- get_setting("webhdfs.cluster.nn.url", NULL, param="name_node", scope="cluster", setter=set_name_node_url)
+  if (!grepl("^http", vm))
+    vm <- paste0("http://", vm)
+
+  # TODO: test namenode, and use failover if necessary
+
+  # TODO: pending change to config yaml
   # port <- get_webhdfs_port()
   port <- "50070"
 
@@ -23,10 +28,12 @@ get_webhdfs_url <- function() {
 }
 
 
-test_namenode <- function() {
 
 
-}
+# test_namenode <- function() {
+#
+#
+# }
 
 
 
