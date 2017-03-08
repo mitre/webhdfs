@@ -22,6 +22,7 @@ hdfs_ls <- function(path, return_type=get_return_type()) {
   dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
 
   dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
+  dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
 
   return(dat)
 }
