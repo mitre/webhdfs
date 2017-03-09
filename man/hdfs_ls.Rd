@@ -4,13 +4,15 @@
 \alias{hdfs_ls}
 \title{List a directory}
 \usage{
-hdfs_ls(path, return_type = get_return_type())
+hdfs_ls(path, recursive = FALSE, return_type = get_return_type())
 }
 \arguments{
 \item{path}{Character containing file system path}
 
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}
+
+\item{resursive}{Logical indicator of whether to resursively list individual files within sub-directories.  Default FALSE.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from
