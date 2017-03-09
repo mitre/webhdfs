@@ -11,8 +11,8 @@ get_webhdfs_url <- function() {
 
   # webhdfs base url from namenode
   nn <- get_setting("webhdfs.cluster.nn.url", NULL, param="name_node", scope="cluster", setter=set_name_node_url)
-  if (!grepl("^http", vm))
-    vm <- paste0("http://", vm)
+  if (!grepl("^http", nn))
+    nn <- paste0("http://", nn)
 
   # TODO: test namenode, and use failover if necessary
 
