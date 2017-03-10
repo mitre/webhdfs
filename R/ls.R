@@ -19,13 +19,37 @@
 #'
 hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
 
-  # TODO: handle wildcards by getting the directory above it, everything from there, with the rest of the path below it
+  # handle wildcards by getting the directory above it, everything from there, with the rest of the path below it
+  # maybe make this a separate function, also handle vector
+  wildcard_pos <- regexpr("\\*", path)
+  if (wildcard_pos > 0) {
+    prefix <- substr(path, 1, wildcard_pos-1)
+    suffix <- substr(path, wildcard_pos+1, nchar(path))
 
+    # expand wildcard by getting the sub-directories in its place
+    expand_path <- hdfs_ls(prefix, recursive = FALSE)
+    path_vector <- paste0(prefix, expand_path$pathSuffix, suffix)
+
+    # TODO: need to handle file not found exception
+    dat_vector <- hdfs_ls(path_vector[1], recursive = recursive, return_type=return_type)
+    if (length(path_vector) > 1) {
+      for (i in 2:length(path_vector)) {
+        tmp_result <- hdfs_ls(path_vector[i], recursive = recursive, return_type=return_type)
+        dat_vector <- rbind(dat_vector, tmp_result)
+      }
+    }
+
+    return(dat_vector)
+  }
+
+  # main call to HDFS command
   dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
 
+  # formatting as POSIX (which could be done by hdfs_get)
   dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
   dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
 
+  # optionally recurse through sub-directories
   if (recursive == TRUE) {
     # split results into files and directories
     dat_file <- dat[dat$type == "FILE"]
