@@ -19,7 +19,13 @@ details and options.}
   the WebHDFS operation
 }
 \description{
-Generic function to perform HTTP GET request of a WebHDFS operation
+The full URL is built from the base WebHDFS URL via the
+\code{\link{get_webhdfs_url}} function, and the supplied \code{path} and
+\code{operation} parameters.
+}
+\details{
+If the WebHDFS command returns an exception, this function issues a warning
+containing the exception message and returns an empty \code{data.frame}.
 }
 \examples{
 hdfs_get("/data/raw/tma/SCHEDL", "LISTSTATUS")
@@ -27,7 +33,7 @@ hdfs_get("/data/raw/tma/SCHEDL", "LISTSTATUS")
 }
 \seealso{
 \url{http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/WebHDFS.html}
-  for documentation of WebHDFS REST API commands that can be passed to the
-  \code{operation} parameter
+for documentation of WebHDFS REST API commands that can be passed to the
+\code{operation} parameter
 }
 

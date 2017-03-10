@@ -17,10 +17,19 @@
 #' @examples
 #' hdfs_ls("/data/raw/tma/SCHEDL")
 #'
+#' # use wildcard to get new years day from every year
+#' hdfs_ls("/data/raw/tma/SCHEDL/zny/*/01/01")
+#'
+#' # use wildcard to get first of the month from every artcc
+#' hdfs_ls("/data/raw/tma/SCHEDL/*/2017/*/01")
+#'
 hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
 
-  # handle wildcards by getting the directory above it, everything from there, with the rest of the path below it
-  # maybe make this a separate function, also handle vector
+  # handle wildcards by
+  # - getting the directory above it
+  # - get everything from that directory
+  # - check the remainder of the supplied path below that directory
+  # (maybe make this a separate function, also handle vectorized inputs)
   wildcard_pos <- regexpr("\\*", path)
   if (wildcard_pos > 0) {
     prefix <- substr(path, 1, wildcard_pos-1)
@@ -30,10 +39,10 @@ hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
     expand_path <- hdfs_ls(prefix, recursive = FALSE)
     path_vector <- paste0(prefix, expand_path$pathSuffix, suffix)
 
-    # TODO: need to handle file not found exception
-    dat_vector <- hdfs_ls(path_vector[1], recursive = recursive, return_type=return_type)
-    if (length(path_vector) > 1) {
-      for (i in 2:length(path_vector)) {
+    # loop through each expanded path and list its contents
+    dat_vector <- data.frame()
+    if (length(path_vector) > 0) {
+      for (i in 1:length(path_vector)) {
         tmp_result <- hdfs_ls(path_vector[i], recursive = recursive, return_type=return_type)
         dat_vector <- rbind(dat_vector, tmp_result)
       }
@@ -46,8 +55,10 @@ hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
   dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
 
   # formatting as POSIX (which could be done by hdfs_get)
-  dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
-  dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
+  if (all(c("modificationTime", "accessTime") %in% names(dat))) {
+    dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
+    dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
+  }
 
   # optionally recurse through sub-directories
   if (recursive == TRUE) {

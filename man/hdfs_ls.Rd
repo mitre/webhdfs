@@ -12,7 +12,8 @@ hdfs_ls(path, recursive = FALSE, return_type = get_return_type())
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}
 
-\item{resursive}{Logical indicator of whether to resursively list individual files within sub-directories.  Default FALSE.}
+\item{resursive}{Logical indicator of whether to resursively list individual
+files within sub-directories.  Default FALSE.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from
@@ -23,6 +24,12 @@ Shortcut for WebHDFS LISTSTATUS operation
 }
 \examples{
 hdfs_ls("/data/raw/tma/SCHEDL")
+
+# use wildcard to get new years day from every year
+hdfs_ls("/data/raw/tma/SCHEDL/zny/*/01/01")
+
+# use wildcard to get first of the month from every artcc
+hdfs_ls("/data/raw/tma/SCHEDL/*/2017/*/01")
 
 }
 
