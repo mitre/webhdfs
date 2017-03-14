@@ -26,7 +26,7 @@ set_cluster <- function(name, config_yaml) {
   # clear cache
   reset_cache()
 
-  # configure soh to use the specified cluster
+  # configure webhdfs to use the specified cluster
   set_var("webhdfs.configs", configs)
 
   # set cluster name
