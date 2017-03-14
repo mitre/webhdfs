@@ -39,7 +39,7 @@ get_cluster <- function() {
   return(get_var("webhdfs.cluster"))
 }
 
-#' Manually specify cluster settings
+#' Manually specify cluster settings for namenode
 #'
 #' @export
 #' @rdname set_name_node_url
@@ -50,9 +50,43 @@ set_name_node_url <- function(url) {
 #' @export
 #' @rdname set_name_node_url
 get_name_node_url <- function() {
-  vm <- get_setting("webhdfs.cluster.nn.url", NULL, param="name_node", scope="cluster", setter=set_name_node_url)
-  if (!grepl("^hdfs", vm))
-    vm <- paste0("hdfs://", vm)
-  return(vm)
+  nn <- get_setting("webhdfs.cluster.nn.url", NULL, param="name_node", scope="cluster", setter=set_name_node_url)
+  if (any(!grepl("^http", nn)))
+    nn <- paste0("http://", nn)
+  return(nn)
 }
+
+
+
+#' Manually specify cluster settings for WebHDFS port number
+#'
+#' @export
+#' @rdname set_webhdfs_port
+set_webhdfs_port <- function(port) {
+  set_var("webhdfs.cluster.webhdfs.port", port)
+}
+
+#' @export
+#' @rdname set_webhdfs_port
+get_webhdfs_port <- function() {
+  port <- get_setting("webhdfs.cluster.webhdfs.port", NULL, param="port", scope="webhdfs", setter=set_webhdfs_port)
+  return(port)
+}
+
+
+#' Manually specify cluster settings for WebHDFS URL suffix
+#'
+#' @export
+#' @rdname set_webhdfs_suffix
+set_webhdfs_suffix <- function(suffix) {
+  set_var("webhdfs.cluster.webhdfs.suffix", suffix)
+}
+
+#' @export
+#' @rdname set_webhdfs_suffix
+get_webhdfs_suffix <- function() {
+  suffix <- get_setting("webhdfs.cluster.webhdfs.suffix", NULL, param="suffix", scope="webhdfs", setter=set_webhdfs_port)
+  return(suffix)
+}
+
 

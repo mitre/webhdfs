@@ -9,13 +9,10 @@
 #' @examples
 get_webhdfs_url <- function() {
 
-  # webhdfs base url from namenode
-  nn <- get_setting("webhdfs.cluster.nn.url", NULL, param="name_node", scope="cluster", setter=set_name_node_url)
-  if (any(!grepl("^http", nn)))
-    nn <- paste0("http://", nn)
-
-  port <- get_setting("webhdfs.cluster.webhdfs.port", NULL, param="port", scope="webhdfs", setter=set_name_node_url)
-  suffix <- get_setting("webhdfs.cluster.webhdfs.suffix", NULL, param="suffix", scope="webhdfs", setter=set_name_node_url)
+  # build webhdfs base url from namenode, port, and suffix
+  nn <- get_name_node_url()
+  port <- get_webhdfs_port()
+  suffix <- get_webhdfs_suffix()
 
   # build candidate webhdfs urls
   candidates <- paste0(nn, ":", port, "/", suffix)
@@ -30,7 +27,7 @@ get_webhdfs_url <- function() {
   }
 
   if (found_active == TRUE) {
-    # set variable
+    set_var("webhdfs.cluster.active.url", candidates[i])
 
     return(candidates[i])
   } else {

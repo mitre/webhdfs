@@ -3,13 +3,13 @@
 \name{set_name_node_url}
 \alias{get_name_node_url}
 \alias{set_name_node_url}
-\title{Manually specify cluster settings}
+\title{Manually specify cluster settings for namenode}
 \usage{
 set_name_node_url(url)
 
 get_name_node_url()
 }
 \description{
-Manually specify cluster settings
+Manually specify cluster settings for namenode
 }
 
