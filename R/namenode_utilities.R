@@ -9,6 +9,12 @@
 #' @examples
 get_webhdfs_url <- function() {
 
+  # test if value has already been set
+  out <- get_var("webhdfs.cluster.active.url")
+  if (!is.null(out)) {
+    return(out)
+  }
+
   # build webhdfs base url from namenode, port, and suffix
   nn <- get_name_node_url()
   port <- get_webhdfs_port()
