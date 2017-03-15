@@ -20,7 +20,9 @@ details and options.}
 Shortcut for WebHDFS GETCONTENTSUMMARY operation
 }
 \examples{
-hdfs_sumary("/data/raw/tma/SCHEDL")
+\dontrun{
+hdfs_sumary("/data/blah/")
+}
 
 }
 

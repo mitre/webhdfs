@@ -26,7 +26,9 @@
 #' \code{operation} parameter
 #'
 #' @examples
-#' hdfs_get("/data/raw/tma/SCHEDL", "LISTSTATUS")
+#' \dontrun{
+#' hdfs_get("/data/", "LISTSTATUS")
+#' }
 #'
 hdfs_get <- function(path, operation, return_type=get_return_type()) {
 

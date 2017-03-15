@@ -22,14 +22,26 @@ files within sub-directories.  Default FALSE.}
 \description{
 Shortcut for WebHDFS LISTSTATUS operation
 }
+\details{
+Wildcards (*) in the provided \code{path} are handled by getting all contents at that
+level of the directory structure, and appending any remaining portions of the
+\code{path} below that level.
+}
 \examples{
-hdfs_ls("/data/raw/tma/SCHEDL")
+\dontrun{
+# basic usage to list directory contents
+hdfs_ls("/data/")
 
-# use wildcard to get new years day from every year
-hdfs_ls("/data/raw/tma/SCHEDL/zny/*/01/01")
+# recursively list files within sub-directories
+hdfs_ls("/data/blah/2016", recursive = TRUE)
 
-# use wildcard to get first of the month from every artcc
-hdfs_ls("/data/raw/tma/SCHEDL/*/2017/*/01")
+# use wildcard to get the first day of every month in 2016
+hdfs_ls("/data/blah/2016/*/01")
+
+# use wildcards to get all days in July in every year
+hdfs_ls("/data/blah/*/07/*")
+}
+
 
 }
 

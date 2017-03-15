@@ -28,7 +28,9 @@ If the WebHDFS command returns an exception, this function issues a warning
 containing the exception message and returns an empty \code{data.frame}.
 }
 \examples{
-hdfs_get("/data/raw/tma/SCHEDL", "LISTSTATUS")
+\dontrun{
+hdfs_get("/data/", "LISTSTATUS")
+}
 
 }
 \seealso{

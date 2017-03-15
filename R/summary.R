@@ -13,7 +13,9 @@
 #' @export
 #'
 #' @examples
-#' hdfs_sumary("/data/raw/tma/SCHEDL")
+#' \dontrun{
+#' hdfs_sumary("/data/blah/")
+#' }
 #'
 hdfs_summary <- function(path, return_type=get_return_type()) {
 
