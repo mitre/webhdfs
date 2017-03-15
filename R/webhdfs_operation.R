@@ -1,7 +1,7 @@
 
 
 
-#' Generic function to perform HTTP GET request of a WebHDFS operation
+#' Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation
 #'
 #' The full URL is built from the base WebHDFS URL via the
 #' \code{\link{get_webhdfs_url}} function, and the supplied \code{path} and
@@ -20,6 +20,7 @@
 #' @return \code{data.frame} (or other requested type) containing output from
 #'   the WebHDFS operation
 #' @export
+#' @rdname hdfs_get
 #' @seealso
 #' \url{http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/WebHDFS.html}
 #' for documentation of WebHDFS REST API commands that can be passed to the
@@ -49,3 +50,22 @@ hdfs_get <- function(path, operation, return_type=get_return_type()) {
 
   format_return(dat, return_type)
 }
+
+
+
+
+#' @importFrom jsonlite fromJSON
+#' @importFrom RCurl httpPUT
+#' @export
+#' @rdname hdfs_get
+#'
+hdfs_put <- function(path, operation) {
+
+  hdfs_path <- paste0(get_webhdfs_url(), path,
+                      "?user.name=", get_user(),
+                      "&op=", toupper(operation))
+
+  result <- fromJSON(httpPUT(hdfs_path))
+  return(result)
+}
+

@@ -2,9 +2,12 @@
 % Please edit documentation in R/webhdfs_operation.R
 \name{hdfs_get}
 \alias{hdfs_get}
-\title{Generic function to perform HTTP GET request of a WebHDFS operation}
+\alias{hdfs_put}
+\title{Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation}
 \usage{
 hdfs_get(path, operation, return_type = get_return_type())
+
+hdfs_put(path, operation)
 }
 \arguments{
 \item{path}{Character containing file system path}
