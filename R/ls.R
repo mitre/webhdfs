@@ -83,6 +83,9 @@ hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
       sub_path <- paste0(path, "/", sub_dir)
       sub_result <- hdfs_ls(sub_path, recursive=recursive, return_type=return_type)
 
+      # retain the sub-directory in the pathSuffix of each result
+      sub_result$pathSuffix <- paste0(sub_dir, "/", sub_result$pathSuffix)
+
       # combine files from sub-directory with files in existing list
       dat_file <- rbind(dat_file, sub_result)
     }
