@@ -33,7 +33,7 @@
 #'
 hdfs_get <- function(path, operation, return_type=get_return_type()) {
 
-  hdfs_path <- paste0(get_webhdfs_url(), path, "?op=", toupper(operation))
+  hdfs_path <- paste0(get_webhdfs_url(), path, "?op=", operation)
 
   dat_list <- fromJSON(getURL(hdfs_path))
   dat <- unlist_carefully(dat_list)
@@ -76,7 +76,7 @@ hdfs_put <- function(path, operation, user = NULL) {
 
   hdfs_path <- paste0(get_webhdfs_url(), path,
                       "?user.name=", user,
-                      "&op=", toupper(operation))
+                      "&op=", operation)
 
   result <- fromJSON(httpPUT(hdfs_path))
   return(result)

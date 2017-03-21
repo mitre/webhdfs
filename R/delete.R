@@ -10,6 +10,7 @@
 #' @param user Character username to use in WebHDFS operation.  If not provided,
 #'   \code{webhdfs.user} will be used and if that has not been set, a call to
 #'   \code{\link{guess_user}} will be made.
+#' @return Boolean indicator of whether the delete operation succeeded
 #' @export
 #'
 hdfs_delete <- function(path, recursive = FALSE, user = NULL) {

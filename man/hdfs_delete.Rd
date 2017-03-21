@@ -15,6 +15,9 @@ hdfs_delete(path, recursive = FALSE, user = NULL)
 \code{webhdfs.user} will be used and if that has not been set, a call to
 \code{\link{guess_user}} will be made.}
 }
+\value{
+Boolean indicator of whether the delete operation succeeded
+}
 \description{
 Shortcut to WebHDFS DELETE operation
 }

@@ -12,7 +12,6 @@
 #' @param permission Optional octal specification of permissions for the new
 #'   directory.  If none is provided, the WebHDFS default (755) is used.
 #' @return Boolean indicator of whether the directory was created successfully
-#' @seealso
 #' @export
 #'
 #' @examples
