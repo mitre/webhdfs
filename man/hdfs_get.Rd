@@ -7,7 +7,7 @@
 \usage{
 hdfs_get(path, operation, return_type = get_return_type())
 
-hdfs_put(path, operation)
+hdfs_put(path, operation, user = NULL)
 }
 \arguments{
 \item{path}{Character containing file system path}
@@ -16,6 +16,10 @@ hdfs_put(path, operation)
 
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}
+
+\item{user}{Character username to use in WebHDFS operation.  If not provided,
+\code{webhdfs.user} will be used and if that has not been set, a call to
+\code{\link{guess_user}} will be made.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from

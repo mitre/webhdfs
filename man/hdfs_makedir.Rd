@@ -4,10 +4,14 @@
 \alias{hdfs_makedir}
 \title{Make a directory}
 \usage{
-hdfs_makedir(path, permission = NULL)
+hdfs_makedir(path, user = NULL, permission = NULL)
 }
 \arguments{
 \item{path}{Character path to create}
+
+\item{user}{Character username to use in WebHDFS operation.  If not provided,
+\code{webhdfs.user} will be used and if that has not been set, a call to
+\code{\link{guess_user}} will be made.}
 
 \item{permission}{Optional octal specification of permissions for the new
 directory.  If none is provided, the WebHDFS default (755) is used.}
