@@ -71,43 +71,49 @@ hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
       }
     }
 
-    return(dat_vector)
-  }
+    out <- dat_vector
+  } else {  # else no wildcard
 
-  # main call to HDFS command
-  dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
+    # main call to HDFS command
+    dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
 
-  # formatting as POSIX (which could be done by hdfs_get)
-  if (all(c("modificationTime", "accessTime") %in% names(dat))) {
-    dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
-    dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
-  }
-
-  # optionally recurse through sub-directories
-  if (recursive == TRUE) {
-    # split results into files and directories
-    dat_file <- dat[dat$type == "FILE"]
-    dat_dir <- dat[dat$type == "DIRECTORY"]
-
-    # for each sub-directory
-    for (sub_dir in dat_dir$pathSuffix) {
-      # search sub-directories for files
-      sub_path <- paste0(path, "/", sub_dir)
-      sub_result <- hdfs_ls(sub_path, recursive=recursive, return_type=return_type)
-
-      # retain the sub-directory in the pathSuffix of each result
-      sub_result$pathSuffix <- paste0(sub_dir, "/", sub_result$pathSuffix)
-
-      # combine files from sub-directory with files in existing list
-      dat_file <- rbind(dat_file, sub_result)
+    # formatting as POSIX (which could be done by hdfs_get)
+    if (all(c("modificationTime", "accessTime") %in% names(dat))) {
+      dat$modificationTime <- hdfs_timestamp_to_posix(dat$modificationTime)
+      dat$accessTime <- hdfs_timestamp_to_posix(dat$accessTime)
     }
 
-    # return file list
-    return(dat_file)
-  } else {
-    return(dat)
+    # optionally recurse through sub-directories
+    if (recursive == TRUE) {
+      # split results into files and directories
+      dat_file <- dat[dat$type == "FILE"]
+      dat_dir <- dat[dat$type == "DIRECTORY"]
+
+      # for each sub-directory
+      for (sub_dir in dat_dir$pathSuffix) {
+        # search sub-directories for files
+        sub_path <- paste0(path, "/", sub_dir)
+        sub_result <- hdfs_ls(sub_path, recursive=recursive, return_type=return_type)
+
+        # retain the sub-directory in the pathSuffix of each result
+        sub_result$pathSuffix <- paste0(sub_dir, "/", sub_result$pathSuffix)
+
+        # combine files from sub-directory with files in existing list
+        dat_file <- rbind(dat_file, sub_result)
+      }
+
+      # return file list
+      out <- dat_file
+    } else {  # else do not recurse
+      out <- dat
+    }  # end else do not recurse
+  }  # end else no wildcard
+
+  if (concise) {
+    out <- clean_liststatus_columns(out)
   }
 
+  return(out)
 }
 
 
