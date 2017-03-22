@@ -13,6 +13,9 @@ clean_liststatus_columns(dat)
 \arguments{
 \item{path}{Character containing file system path}
 
+\item{recursive}{Logical indicator of whether to resursively list individual
+files within sub-directories.  Default FALSE.}
+
 \item{concise}{Logical indicator of whether to return only a select subset of
 columns.  Default FALSE.}
 
@@ -20,9 +23,6 @@ columns.  Default FALSE.}
 details and options.}
 
 \item{dat}{Data frame containing the result of a LISTSTATUS command}
-
-\item{resursive}{Logical indicator of whether to resursively list individual
-files within sub-directories.  Default FALSE.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from

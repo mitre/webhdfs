@@ -7,6 +7,22 @@ home:
   - text: Source
     href: https://mustache.mitre.org/projects/CGRP/repos/webhdfs/browse
 
+reference:
+  - title: WebHDFS Operations
+    desc: Helper functions to issue WebHDFS commands and process results
+    contents:
+    - starts_with("hdfs_")
+    - unlist_carefully
+  - title: Settings
+    desc: Functions to help configure cluster access
+    contents:
+    - starts_with("get_")
+    - starts_with("set_")
+    - apply_default_configurations
+    - guess_user
+    - is_supported_return_type
+    - is_namenode_active
+
 navbar:
   type: inverse
   left:

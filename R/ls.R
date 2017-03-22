@@ -18,7 +18,7 @@
 #' columns returned by \code{LISTSTATUS}, in the original order.
 #'
 #' @param path Character containing file system path
-#' @param resursive Logical indicator of whether to resursively list individual
+#' @param recursive Logical indicator of whether to resursively list individual
 #'   files within sub-directories.  Default FALSE.
 #' @param concise Logical indicator of whether to return only a select subset of
 #'   columns.  Default FALSE.

@@ -169,8 +169,8 @@ get_user <- function() {
   return(get_setting("webhdfs.user", NULL))
 }
 
-# Returns the username for the current logged in user in lowercase. This works for both
-# windows and unix
+#' @export
+#' @rdname webhdfs.defaults
 guess_user <- function(){
   if(.Platform$OS.type=="windows")
     return(tolower(Sys.getenv("USERNAME")))

@@ -2,14 +2,39 @@
 % Please edit documentation in R/settings_cluster.R
 \name{set_name_node_url}
 \alias{get_name_node_url}
+\alias{get_webhdfs_port}
+\alias{get_webhdfs_suffix}
 \alias{set_name_node_url}
+\alias{set_webhdfs_port}
+\alias{set_webhdfs_suffix}
 \title{Manually specify cluster settings for namenode}
 \usage{
 set_name_node_url(url)
 
 get_name_node_url()
+
+set_webhdfs_port(port)
+
+get_webhdfs_port()
+
+set_webhdfs_suffix(suffix)
+
+get_webhdfs_suffix()
+}
+\arguments{
+\item{url}{Character containing full URL to cluster namenode}
+
+\item{port}{Character containing port number for WebHDFS service}
+
+\item{suffix}{Character containing suffix for WebHDFS service}
 }
 \description{
 Manually specify cluster settings for namenode
+
+\code{port} is used in building the full WebHDFS URL, in combination with
+the namenode and suffix
+
+\code{suffix} is used in building the full WebHDFS URL, in combination with
+the namenode and port
 }
 

@@ -4,6 +4,7 @@
 \alias{apply_default_configurations}
 \alias{get_return_type}
 \alias{get_user}
+\alias{guess_user}
 \alias{set_return_type}
 \alias{set_user}
 \title{WebHDFS Options}
@@ -17,6 +18,8 @@ get_return_type()
 set_user(user)
 
 get_user()
+
+guess_user()
 }
 \arguments{
 \item{return_type}{character string, must be one of \code{"data.frame", "data.table", "tbl"}}

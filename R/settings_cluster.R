@@ -41,6 +41,7 @@ get_cluster <- function() {
 
 #' Manually specify cluster settings for namenode
 #'
+#' @param url Character containing full URL to cluster namenode
 #' @export
 #' @rdname set_name_node_url
 set_name_node_url <- function(url) {
@@ -60,14 +61,18 @@ get_name_node_url <- function() {
 
 #' Manually specify cluster settings for WebHDFS port number
 #'
+#' \code{port} is used in building the full WebHDFS URL, in combination with
+#' the namenode and suffix
+#'
+#' @param port Character containing port number for WebHDFS service
 #' @export
-#' @rdname set_webhdfs_port
+#' @rdname set_name_node_url
 set_webhdfs_port <- function(port) {
   set_var("webhdfs.cluster.webhdfs.port", port)
 }
 
 #' @export
-#' @rdname set_webhdfs_port
+#' @rdname set_name_node_url
 get_webhdfs_port <- function() {
   port <- get_setting("webhdfs.cluster.webhdfs.port", NULL, param="port", scope="webhdfs", setter=set_webhdfs_port)
   return(port)
@@ -76,14 +81,18 @@ get_webhdfs_port <- function() {
 
 #' Manually specify cluster settings for WebHDFS URL suffix
 #'
+#' \code{suffix} is used in building the full WebHDFS URL, in combination with
+#' the namenode and port
+#'
+#' @param suffix Character containing suffix for WebHDFS service
 #' @export
-#' @rdname set_webhdfs_suffix
+#' @rdname set_name_node_url
 set_webhdfs_suffix <- function(suffix) {
   set_var("webhdfs.cluster.webhdfs.suffix", suffix)
 }
 
 #' @export
-#' @rdname set_webhdfs_suffix
+#' @rdname set_name_node_url
 get_webhdfs_suffix <- function() {
   suffix <- get_setting("webhdfs.cluster.webhdfs.suffix", NULL, param="suffix", scope="webhdfs", setter=set_webhdfs_port)
   return(suffix)
