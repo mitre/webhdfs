@@ -37,15 +37,16 @@ options will begin with \code{webhdfs.}
         hive. Most R users are used to working with \code{data.frame} objects. However this function
         allows users to specify a default return type of either \code{data.table} for data.table
         users or \code{tbl} for dplyr users.}
-  \item{webhdfs.user}{Some hive queries kick off map/reduce jobs, others don't. For those that
-        do it is necessary to provide a username with your JDBC connection as this allows the
-        map/reduce job to execute. If no username is given or an incorrect one is used (i.e., one
-        not associated with an account on the hadoop cluster) then more complicated queries (e.g.,
-        those involving joins of multiple tables) will fail with exit status 1. There is a mechanism
-        by which this package guesses at your hadoop username making the assumption that it is the
-        lowercase version of the computer user name. This should work for most people, but not all. If
-        you are one of the lucky ones maintaining multiple (different) usernames then you should
-        set this parameter before trying to use this package.}
+  \item{webhdfs.user}{Some WebHDFS operations and server configurations
+        require authentication, and others don't. For those that do it is necessary
+        to provide a username as part of the command url. If no username is given
+        or an incorrect one is used (i.e., one not associated with an account on
+        the hadoop cluster) then some operations (e.g., rename or delete) will fail
+        with exit status 1. There is a mechanism by which this package guesses at
+        your hadoop username making the assumption that it is the lowercase version
+        of the computer user name. This should work for most people, but not all.
+        If you are one of the lucky ones maintaining multiple (different) usernames
+        then you should set this parameter before trying to use this package.}
 }
 }
 
