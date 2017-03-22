@@ -4,13 +4,24 @@
 #'
 #' Shortcut for WebHDFS LISTSTATUS operation
 #'
-#' Wildcards (*) in the provided \code{path} are handled by getting all contents at that
-#' level of the directory structure, and appending any remaining portions of the
-#' \code{path} below that level.
+#' Wildcards (*) in the provided \code{path} are handled by getting all contents
+#' at that level of the directory structure, and appending any remaining
+#' portions of the \code{path} below that level.
+#'
+#' When \code{concise = TRUE}, function \code{clean_liststatus_columns} is
+#' called to limit the set of columns from the WebHDFS \code{LISTSTATUS}
+#' operation to the following fields in this order: \code{pathSuffix},
+#' \code{childrenNum}, \code{length}, \code{group}, \code{modificationTime},
+#' \code{owner}, \code{permission}, \code{type}.  Note that this places the
+#' \code{pathSuffix} field as the first column, which differs from the default
+#' ordering. When \code{concise = FALSE}, the results include the full set of
+#' columns returned by \code{LISTSTATUS}, in the original order.
 #'
 #' @param path Character containing file system path
 #' @param resursive Logical indicator of whether to resursively list individual
 #'   files within sub-directories.  Default FALSE.
+#' @param concise Logical indicator of whether to return only a select subset of
+#'   columns.  Default FALSE.
 #' @param return_type character string. See \code{\link{set_return_type}} for
 #'   details and options.
 #'
@@ -34,7 +45,8 @@
 #' }
 #'
 #'
-hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
+hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
+                    return_type=get_return_type()) {
 
   # handle wildcards by
   # - getting the directory above it
@@ -98,3 +110,19 @@ hdfs_ls <- function(path, recursive = FALSE, return_type=get_return_type()) {
 
 }
 
+
+
+#' @param dat Data frame containing the result of a LISTSTATUS command
+#' @export
+#' @rdname hdfs_ls
+clean_liststatus_columns <- function(dat) {
+
+  requested_columns <- c("pathSuffix", "childrenNum", "length", "group",
+                         "modificationTime", "owner", "permission", "type")
+
+  # this reorders columns so pathSuffix is first, and only includes selected columns in the output
+  if (all(requested_columns %in% names(dat))) {
+    dat <- dat[, requested_columns]
+  }
+
+}
