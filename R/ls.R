@@ -122,7 +122,12 @@ clean_liststatus_columns <- function(dat) {
 
   # this reorders columns so pathSuffix is first, and only includes selected columns in the output
   if (all(requested_columns %in% names(dat))) {
-    dat <- dat[, requested_columns]
+
+    if (inherits(dat, "data.table")) {
+      dat <- dat[, requested_columns, with = FALSE]
+    } else {  # this is fine for data.frame and tbl
+      dat <- dat[, requested_columns]
+    }
   }
 
 }
