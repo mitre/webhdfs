@@ -86,8 +86,8 @@ hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
     # optionally recurse through sub-directories
     if (recursive == TRUE) {
       # split results into files and directories
-      dat_file <- dat[dat$type == "FILE"]
-      dat_dir <- dat[dat$type == "DIRECTORY"]
+      dat_file <- dat[dat$type == "FILE",]
+      dat_dir <- dat[dat$type == "DIRECTORY",]
 
       # for each sub-directory
       for (sub_dir in dat_dir$pathSuffix) {

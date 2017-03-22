@@ -47,3 +47,8 @@ test_that("clean_liststatus_columns works with tbl", {
 
 
 })
+
+
+# TODO: test combinations of recursion and concise parameters
+
+# TODO: test that recursion works with empty sub-directories
