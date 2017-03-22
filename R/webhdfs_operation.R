@@ -11,7 +11,7 @@
 #' containing the exception message and returns an empty \code{data.frame}.
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom RCurl getURL
+#' @importFrom httr GET content
 #' @param path Character containing file system path
 #' @param operation Character containing WebHDFS operation name
 #' @param return_type character string. See \code{\link{set_return_type}} for
@@ -35,7 +35,9 @@ hdfs_get <- function(path, operation, return_type=get_return_type()) {
 
   hdfs_path <- paste0(get_webhdfs_url(), path, "?op=", operation)
 
-  dat_list <- fromJSON(getURL(hdfs_path))
+  dat_list <- fromJSON(content(GET(hdfs_path),
+                               as = "text", encoding = "UTF-8"))
+
   dat <- unlist_carefully(dat_list)
 
   # check for exception (e.g. FileNotFoundException)
