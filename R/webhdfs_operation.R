@@ -31,9 +31,11 @@
 #' hdfs_get("/data/", "LISTSTATUS")
 #' }
 #'
-hdfs_get <- function(path, operation, return_type=get_return_type()) {
+hdfs_get <- function(path, operation, user = get_user(), return_type = get_return_type()) {
 
-  hdfs_path <- paste0(get_webhdfs_url(), path, "?op=", operation)
+  hdfs_path <- paste0(get_webhdfs_url(), path,
+                      "?user.name=", user,
+                      "&op=", operation)
 
   dat_list <- fromJSON(content(GET(hdfs_path),
                                as = "text", encoding = "UTF-8"))
@@ -55,7 +57,6 @@ hdfs_get <- function(path, operation, return_type=get_return_type()) {
 
 
 
-
 #' @importFrom jsonlite fromJSON
 #' @importFrom httr PUT content
 #' @param user Character username to use in WebHDFS operation.  If not provided,
@@ -64,17 +65,7 @@ hdfs_get <- function(path, operation, return_type=get_return_type()) {
 #' @export
 #' @rdname hdfs_get
 #'
-hdfs_put <- function(path, operation, user = NULL) {
-
-  if (is.null(user)) {
-    # take from user package setting
-    try({user <- get_user()})
-
-    # if user setting is not set, guess
-    if (is.null(user)) {
-      user <- guess_user()
-    }
-  }
+hdfs_put <- function(path, operation, user = get_user()) {
 
   hdfs_path <- paste0(get_webhdfs_url(), path,
                       "?user.name=", user,
