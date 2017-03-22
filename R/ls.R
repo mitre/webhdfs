@@ -22,6 +22,9 @@
 #'   files within sub-directories.  Default FALSE.
 #' @param concise Logical indicator of whether to return only a select subset of
 #'   columns.  Default FALSE.
+#' @param user Character username to use in WebHDFS operation.  If not provided,
+#'   \code{webhdfs.user} will be used and if that has not been set, a call to
+#'   \code{\link{guess_user}} will be made.
 #' @param return_type character string. See \code{\link{set_return_type}} for
 #'   details and options.
 #'
@@ -46,6 +49,7 @@
 #'
 #'
 hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
+                    user = get_user(),
                     return_type=get_return_type()) {
 
   # handle wildcards by
@@ -59,14 +63,14 @@ hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
     suffix <- substr(path, wildcard_pos+1, nchar(path))
 
     # expand wildcard by getting the sub-directories in its place
-    expand_path <- hdfs_ls(prefix, recursive = FALSE)
+    expand_path <- hdfs_ls(prefix, recursive = FALSE, user = user)
     path_vector <- paste0(prefix, expand_path$pathSuffix, suffix)
 
     # loop through each expanded path and list its contents
     dat_vector <- data.frame()
     if (length(path_vector) > 0) {
       for (i in 1:length(path_vector)) {
-        tmp_result <- hdfs_ls(path_vector[i], recursive = recursive, return_type=return_type)
+        tmp_result <- hdfs_ls(path_vector[i], recursive = recursive, user = user, return_type=return_type)
         dat_vector <- rbind(dat_vector, tmp_result)
       }
     }
@@ -75,7 +79,7 @@ hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
   } else {  # else no wildcard
 
     # main call to HDFS command
-    dat <- hdfs_get(path, "LISTSTATUS", return_type=return_type)
+    dat <- hdfs_get(path, "LISTSTATUS", user = user, return_type=return_type)
 
     # formatting as POSIX (which could be done by hdfs_get)
     if (all(c("modificationTime", "accessTime") %in% names(dat))) {
@@ -93,7 +97,7 @@ hdfs_ls <- function(path, recursive = FALSE, concise = FALSE,
       for (sub_dir in dat_dir$pathSuffix) {
         # search sub-directories for files
         sub_path <- paste0(path, "/", sub_dir)
-        sub_result <- hdfs_ls(sub_path, recursive=recursive, return_type=return_type)
+        sub_result <- hdfs_ls(sub_path, user = user, recursive=recursive, return_type=return_type)
 
         # retain the sub-directory in the pathSuffix of each result
         sub_result$pathSuffix <- paste0(sub_dir, "/", sub_result$pathSuffix)
