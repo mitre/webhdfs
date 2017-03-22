@@ -10,7 +10,10 @@ Imports:
     clusterconf,
     jsonlite,
     RCurl
-Suggests: testthat
+Suggests: 
+    data.table,
+    dplyr,
+    testthat
 License: MITRE
 Encoding: UTF-8
 LazyData: true
