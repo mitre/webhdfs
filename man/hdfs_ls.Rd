@@ -5,7 +5,7 @@
 \alias{hdfs_ls}
 \title{List a directory}
 \usage{
-hdfs_ls(path, recursive = FALSE, concise = FALSE,
+hdfs_ls(path, recursive = FALSE, concise = FALSE, user = get_user(),
   return_type = get_return_type())
 
 clean_liststatus_columns(dat)
@@ -18,6 +18,10 @@ files within sub-directories.  Default FALSE.}
 
 \item{concise}{Logical indicator of whether to return only a select subset of
 columns.  Default FALSE.}
+
+\item{user}{Character username to use in WebHDFS operation.  If not provided,
+\code{webhdfs.user} will be used and if that has not been set, a call to
+\code{\link{guess_user}} will be made.}
 
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}

@@ -20,7 +20,7 @@ value is \code{NULL}. Otherwise the \code{NULL} will be returned silently.}
 
 \item{setter}{Function. The \code{set_*} function used to keep track of the parameter value. This
 is needed so that in cases where a parameter is asked for that has not yet been set, the
-configuration lookup need only happen once and then the value us cached.}
+configuration lookup need only happen once and then the value is cached.}
 
 \item{...}{Passed to \code{\link[clusterconf]{get_cluster_param}}.}
 }

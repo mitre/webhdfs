@@ -15,7 +15,7 @@ set_return_type(return_type)
 
 get_return_type()
 
-set_user(user)
+set_user(user = NULL)
 
 get_user()
 

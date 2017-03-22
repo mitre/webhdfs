@@ -4,10 +4,14 @@
 \alias{hdfs_summary}
 \title{Get content summary of a directory}
 \usage{
-hdfs_summary(path, return_type = get_return_type())
+hdfs_summary(path, user = get_user(), return_type = get_return_type())
 }
 \arguments{
 \item{path}{Character containing file system path}
+
+\item{user}{Character username to use in WebHDFS operation.  If not provided,
+\code{webhdfs.user} will be used and if that has not been set, a call to
+\code{\link{guess_user}} will be made.}
 
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}

@@ -5,21 +5,22 @@
 \alias{hdfs_put}
 \title{Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation}
 \usage{
-hdfs_get(path, operation, return_type = get_return_type())
+hdfs_get(path, operation, user = get_user(),
+  return_type = get_return_type())
 
-hdfs_put(path, operation, user = NULL)
+hdfs_put(path, operation, user = get_user())
 }
 \arguments{
 \item{path}{Character containing file system path}
 
 \item{operation}{Character containing WebHDFS operation name}
 
-\item{return_type}{character string. See \code{\link{set_return_type}} for
-details and options.}
-
 \item{user}{Character username to use in WebHDFS operation.  If not provided,
 \code{webhdfs.user} will be used and if that has not been set, a call to
 \code{\link{guess_user}} will be made.}
+
+\item{return_type}{character string. See \code{\link{set_return_type}} for
+details and options.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from
