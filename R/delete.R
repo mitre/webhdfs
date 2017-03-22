@@ -4,7 +4,7 @@
 #' Shortcut to WebHDFS DELETE operation
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom RCurl httpDELETE
+#' @importFrom httr DELETE content
 #' @param path Character containing file system path
 #' @param recursive Boolean indicator of whether to recursively delete sub-directories.  Default FALSE.
 #' @param user Character username to use in WebHDFS operation.  If not provided,
@@ -29,7 +29,8 @@ hdfs_delete <- function(path, recursive = FALSE, user = NULL) {
                       "?user.name=", user,
                       "&op=DELETE&recursive=", tolower(recursive))
 
-  result <- fromJSON(httpDELETE(hdfs_path))
+  result <- fromJSON(content(DELETE(hdfs_path),
+                             as = "text", encoding = "UTF-8"))
   return(result)
 }
 
