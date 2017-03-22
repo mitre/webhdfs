@@ -56,7 +56,7 @@ apply_default_configurations <- function() {
 #' @param scope Character. Configuration scope. See \code{\link[clusterconf]{get_cluster_param}}
 #' @param setter Function. The \code{set_*} function used to keep track of the parameter value. This
 #'        is needed so that in cases where a parameter is asked for that has not yet been set, the
-#'        configuration lookup need only happen once and then the value us cached.
+#'        configuration lookup need only happen once and then the value is cached.
 #' @param ... Passed to \code{\link[clusterconf]{get_cluster_param}}.
 #' @importFrom clusterconf get_cluster_param
 #' @importFrom clusterconf list_available_clusters
@@ -159,14 +159,20 @@ get_return_type <- function() {
 
 #' @export
 #' @rdname webhdfs.defaults
-set_user <- function(user) {
+set_user <- function(user = NULL) {
+
+  # if user is not provided, guess
+  if (is.null(user)) {
+    user <- guess_user()
+  }
+
   set_var("webhdfs.user", user)
 }
 
 #' @export
 #' @rdname webhdfs.defaults
 get_user <- function() {
-  return(get_setting("webhdfs.user", NULL))
+  return(get_setting("webhdfs.user", NULL, allow_null = TRUE, setter = set_user))
 }
 
 #' @export
