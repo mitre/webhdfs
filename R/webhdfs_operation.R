@@ -57,7 +57,7 @@ hdfs_get <- function(path, operation, return_type=get_return_type()) {
 
 
 #' @importFrom jsonlite fromJSON
-#' @importFrom RCurl httpPUT
+#' @importFrom httr PUT content
 #' @param user Character username to use in WebHDFS operation.  If not provided,
 #'   \code{webhdfs.user} will be used and if that has not been set, a call to
 #'   \code{\link{guess_user}} will be made.
@@ -80,7 +80,8 @@ hdfs_put <- function(path, operation, user = NULL) {
                       "?user.name=", user,
                       "&op=", operation)
 
-  result <- fromJSON(httpPUT(hdfs_path))
+  result <- fromJSON(content(PUT(hdfs_path),
+                             as = "text", encoding = "UTF-8"))
   return(result)
 }
 
