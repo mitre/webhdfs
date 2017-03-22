@@ -54,7 +54,7 @@ get_webhdfs_url <- function() {
 #' operation will cause this function to return TRUE.
 #'
 #' @importFrom jsonlite fromJSON
-#' @importFrom RCurl getURL
+#' @importFrom httr GET content
 #' @param webhdfs_url Character containing full WebHDFS URL of the namenode to
 #'   test, including the port number and suffix
 #'
@@ -65,7 +65,8 @@ get_webhdfs_url <- function() {
 is_namenode_active <- function(webhdfs_url) {
 
   test_url <- paste0(webhdfs_url, "/?op=LISTSTATUS")
-  dat <- unlist_carefully(fromJSON(getURL(test_url)))
+  dat <- unlist_carefully(fromJSON(content(GET(test_url),
+                                           as = "text", encoding = "UTF-8")))
 
   if ("exception" %in% names(dat)) {
     return(FALSE)

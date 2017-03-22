@@ -9,8 +9,7 @@ Depends:
 Imports:
     clusterconf,
     httr,
-    jsonlite,
-    RCurl
+    jsonlite
 Suggests: 
     data.table,
     dplyr,
