@@ -30,10 +30,6 @@
 #' @rdname webhdfs.defaults
 apply_default_configurations <- function() {
 
-  # connection status
-  for (engine in get_supported_soh_engines())
-    set_var(paste0("is.", engine, ".connected"), FALSE)
-
   # return type
   set_default("webhdfs.return.type", "data.frame", "set_return_type")
 
