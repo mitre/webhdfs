@@ -13,7 +13,11 @@ hdfs_put(path, operation, user = get_user())
 \arguments{
 \item{path}{Character containing file system path}
 
-\item{operation}{Character containing WebHDFS operation name}
+\item{operation}{Character containing WebHDFS operation name.  This can
+include the operation itself, along with additional parameters as
+necessary.  If parameters are included, they should be separated from the
+operation and each other with '&', such as
+'OPERATION&param1=value1&param2=value2'.}
 
 \item{user}{Character username to use in WebHDFS operation.  If not provided,
 \code{webhdfs.user} will be used and if that has not been set, a call to
@@ -37,7 +41,11 @@ containing the exception message and returns an empty \code{data.frame}.
 }
 \examples{
 \dontrun{
+# basic usage with operation
 hdfs_get("/data/", "LISTSTATUS")
+
+# usage with operation appended to parameter
+hdfs_put("/user/uid/newdir", "MKDIRS&permission=754")
 }
 
 }

@@ -13,7 +13,11 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom httr GET content
 #' @param path Character containing file system path
-#' @param operation Character containing WebHDFS operation name
+#' @param operation Character containing WebHDFS operation name.  This can
+#'   include the operation itself, along with additional parameters as
+#'   necessary.  If parameters are included, they should be separated from the
+#'   operation and each other with '&', such as
+#'   'OPERATION&param1=value1&param2=value2'.
 #' @param return_type character string. See \code{\link{set_return_type}} for
 #'   details and options.
 #'
@@ -28,7 +32,11 @@
 #'
 #' @examples
 #' \dontrun{
+#' # basic usage with operation
 #' hdfs_get("/data/", "LISTSTATUS")
+#'
+#' # usage with operation appended to parameter
+#' hdfs_put("/user/uid/newdir", "MKDIRS&permission=754")
 #' }
 #'
 hdfs_get <- function(path, operation, user = get_user(), return_type = get_return_type()) {
