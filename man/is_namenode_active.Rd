@@ -20,7 +20,7 @@ operation will cause this function to return TRUE.
 }
 \examples{
 \dontrun{
-is_namenode_active("http://nn1.server.com:50070/webhdfs/v1")
+is_namenode_active("http://nn1.server.domain:50070/webhdfs/v1")
 }
 
 }
