@@ -78,12 +78,15 @@ get_webhdfs_url <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' is_namenode_active("http://nn1.server.com:50070/webhdfs/v1")
+#' is_namenode_active("http://nn1.server.domain:50070/webhdfs/v1")
 #' }
 #'
 is_namenode_active <- function(webhdfs_url) {
 
-  test_url <- paste0(webhdfs_url, "/?op=LISTSTATUS")
+  test_url <- paste0(webhdfs_url, "/",
+                      "?user.name=", get_user(),
+                      "&op=LISTSTATUS")
+
   dat <- unlist_carefully(fromJSON(content(GET(test_url),
                                            as = "text", encoding = "UTF-8")))
 
