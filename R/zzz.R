@@ -8,7 +8,7 @@
 reset_cache <- function() {
   rm(list=ls(envir=pkg_globals), envir=pkg_globals)
 
-  set_default("webhdfs.user", guess_user(), "set_user")
+  apply_default_configurations()
 }
 
 get_var <- function(varstr) {
