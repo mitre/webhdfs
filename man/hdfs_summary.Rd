@@ -29,4 +29,3 @@ hdfs_sumary("/data/blah/")
 }
 
 }
-

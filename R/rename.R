@@ -14,7 +14,10 @@
 #' @export
 #'
 #' @examples
-hdfs_rename <- function(old_path, new_path, user = NULL) {
+#' \dontrun{
+#' hdfs_rename("/data/old", "/data/new")
+#' }
+hdfs_rename <- function(old_path, new_path, user = get_user()) {
 
   operation <- "RENAME"
 

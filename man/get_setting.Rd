@@ -29,4 +29,3 @@ Typcally this should not be used directly. It is relied upon by the \code{get_*}
 functions in this package. It is exported mostly to provide transparency around
 the available parameters.
 }
-

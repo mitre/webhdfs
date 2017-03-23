@@ -4,7 +4,7 @@
 \alias{hdfs_delete}
 \title{Delete a file or directory}
 \usage{
-hdfs_delete(path, recursive = FALSE, user = NULL)
+hdfs_delete(path, recursive = FALSE, user = get_user())
 }
 \arguments{
 \item{path}{Character containing file system path}
@@ -21,4 +21,3 @@ Boolean indicator of whether the delete operation succeeded
 \description{
 Shortcut to WebHDFS DELETE operation
 }
-

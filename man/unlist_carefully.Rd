@@ -27,4 +27,15 @@ where \code{\link{as.data.frame}} could generate a column name of
 \code{FileStatuses.FileStatus.accessTime}, this function will result in a
 column name of simply \code{accessTime}.
 }
+\examples{
+# sample data.frame nested within multiple lists
+test <- list(outer = list(inner = data.frame(x = 1, y = 1:10)))
+test
 
+# this function unpacks to a simple data.frame
+unlist_carefully(test)
+
+# compare that to the behavior of as.data.frame
+as.data.frame(test)
+
+}

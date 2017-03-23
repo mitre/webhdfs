@@ -13,7 +13,7 @@
 #' @return Boolean indicator of whether the delete operation succeeded
 #' @export
 #'
-hdfs_delete <- function(path, recursive = FALSE, user = NULL) {
+hdfs_delete <- function(path, recursive = FALSE, user = get_user()) {
 
   if (is.null(user)) {
     # take from user package setting

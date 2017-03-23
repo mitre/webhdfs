@@ -2,11 +2,11 @@
 % Please edit documentation in R/settings.R
 \name{apply_default_configurations}
 \alias{apply_default_configurations}
+\alias{set_return_type}
 \alias{get_return_type}
+\alias{set_user}
 \alias{get_user}
 \alias{guess_user}
-\alias{set_return_type}
-\alias{set_user}
 \title{WebHDFS Options}
 \usage{
 apply_default_configurations()

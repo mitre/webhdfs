@@ -15,7 +15,15 @@
 #' @export
 #'
 #' @examples
-hdfs_makedir <- function(path, user = NULL, permission = NULL) {
+#' \dontrun{
+#' # create directory with default permissions (755)
+#' hdfs_makedir("/data/new")
+#'
+#' # create restricted directory with permissions 750
+#' hdfs_makedir("/data/restricted", permission = "750")
+#' }
+#'
+hdfs_makedir <- function(path, user = get_user(), permission = NULL) {
 
   operation <- "MKDIRS"
 

@@ -18,4 +18,9 @@ If the supplied namenode is currently a standby, this will detect the
 StandbyException from the test operation and return FALSE.  A successful test
 operation will cause this function to return TRUE.
 }
+\examples{
+\dontrun{
+is_namenode_active("http://nn1.server.com:50070/webhdfs/v1")
+}
 
+}

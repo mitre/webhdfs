@@ -1,12 +1,27 @@
 
 
 
-#' Build URL for WebHDFS
+#' Build an active URL for WebHDFS
 #'
-#' @return
+#' Full WebHDFS URL is built dynamically from an active namenode for the current
+#' cluster.
+#'
+#' It is possible to define an array including primary and backup namenodes for
+#' use by the \code{clusterconf} package.  This function will check the provided
+#' namenodes until an active one is found.  The full WebHDFS URL is then built
+#' from the active namenode, along with the cluster settings for WebHDFS port
+#' number and URL suffix.  This should provide the user with consistent access
+#' to WebHDFS services, regardless of which namenode is currently active.
+#'
+#' @return Character containing full WebHDFS URL from an active cluster namenode
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' set_cluster("my prefered cluster")
+#' get_webhdfs_url()
+#' }
+#'
 get_webhdfs_url <- function() {
 
   # test if value has already been set
@@ -62,6 +77,10 @@ get_webhdfs_url <- function() {
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' is_namenode_active("http://nn1.server.com:50070/webhdfs/v1")
+#' }
+#'
 is_namenode_active <- function(webhdfs_url) {
 
   test_url <- paste0(webhdfs_url, "/?op=LISTSTATUS")

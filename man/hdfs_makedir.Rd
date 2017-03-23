@@ -4,7 +4,7 @@
 \alias{hdfs_makedir}
 \title{Make a directory}
 \usage{
-hdfs_makedir(path, user = NULL, permission = NULL)
+hdfs_makedir(path, user = get_user(), permission = NULL)
 }
 \arguments{
 \item{path}{Character path to create}
@@ -22,4 +22,13 @@ Boolean indicator of whether the directory was created successfully
 \description{
 Shortcut to WebHDFS MKDIRS operation
 }
+\examples{
+\dontrun{
+# create directory with default permissions (755)
+hdfs_makedir("/data/new")
 
+# create restricted directory with permissions 750
+hdfs_makedir("/data/restricted", permission = "750")
+}
+
+}

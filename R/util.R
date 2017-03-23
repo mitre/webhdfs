@@ -22,6 +22,8 @@ format_return <- function(dat, return_type){
 #' @export
 #'
 #' @examples
+#' hdfs_timestamp_to_posix(1489039200390)
+#'
 hdfs_timestamp_to_posix <- function(x) {
   return(as.POSIXct(as.numeric(x)/1000,
                     tz="UTC", origin="1970-01-01", format="%s"))
@@ -51,6 +53,16 @@ hdfs_timestamp_to_posix <- function(x) {
 #' @export
 #'
 #' @examples
+#' # sample data.frame nested within multiple lists
+#' test <- list(outer = list(inner = data.frame(x = 1, y = 1:10)))
+#' test
+#'
+#' # this function unpacks to a simple data.frame
+#' unlist_carefully(test)
+#'
+#' # compare that to the behavior of as.data.frame
+#' as.data.frame(test)
+#'
 unlist_carefully <- function(x) {
 
   # grab the innermost object that is either not a list, or has length greater than 1

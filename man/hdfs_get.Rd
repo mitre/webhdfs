@@ -46,4 +46,3 @@ hdfs_get("/data/", "LISTSTATUS")
 for documentation of WebHDFS REST API commands that can be passed to the
 \code{operation} parameter
 }
-

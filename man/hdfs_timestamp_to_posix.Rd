@@ -16,4 +16,7 @@ POSIXct formatted timestamp
 \description{
 Convert HDFS file timestamps to POSIX
 }
+\examples{
+hdfs_timestamp_to_posix(1489039200390)
 
+}

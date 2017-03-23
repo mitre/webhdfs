@@ -2,11 +2,29 @@
 % Please edit documentation in R/namenode_utilities.R
 \name{get_webhdfs_url}
 \alias{get_webhdfs_url}
-\title{Build URL for WebHDFS}
+\title{Build an active URL for WebHDFS}
 \usage{
 get_webhdfs_url()
 }
+\value{
+Character containing full WebHDFS URL from an active cluster namenode
+}
 \description{
-Build URL for WebHDFS
+Full WebHDFS URL is built dynamically from an active namenode for the current
+cluster.
+}
+\details{
+It is possible to define an array including primary and backup namenodes for
+use by the \code{clusterconf} package.  This function will check the provided
+namenodes until an active one is found.  The full WebHDFS URL is then built
+from the active namenode, along with the cluster settings for WebHDFS port
+number and URL suffix.  This should provide the user with consistent access
+to WebHDFS services, regardless of which namenode is currently active.
+}
+\examples{
+\dontrun{
+set_cluster("my prefered cluster")
+get_webhdfs_url()
 }
 
+}

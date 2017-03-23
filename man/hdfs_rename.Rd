@@ -4,7 +4,7 @@
 \alias{hdfs_rename}
 \title{Rename a file or directory}
 \usage{
-hdfs_rename(old_path, new_path, user = NULL)
+hdfs_rename(old_path, new_path, user = get_user())
 }
 \arguments{
 \item{old_path}{Character path of existing file or directory to be renamed}
@@ -21,4 +21,8 @@ Boolean indicator of whether the rename operation completed successfully
 \description{
 Shortcut to WebHDFS RENAME operation
 }
-
+\examples{
+\dontrun{
+hdfs_rename("/data/old", "/data/new")
+}
+}
