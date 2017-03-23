@@ -1,3 +1,7 @@
+# webhdfs 0.0.3
+
+* Bug fix to avoid needing to set return type after changing clusters
+
 # webhdfs 0.0.2
 
 * Use httr instead of RCurl to support additional secure server configurations
