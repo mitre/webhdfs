@@ -1,3 +1,7 @@
+# webhdfs 0.0.6
+
+* Adjust readme so pkgdown displays code coverage
+
 # webhdfs 0.0.5
 
 * Start tracking code coverage
