@@ -20,7 +20,7 @@ img_path <- paste0("https://img.shields.io/badge/Test%20Coverage-",
 ```
 
 [![Bamboo Build Status](https://pandafood.mitre.org/plugins/servlet/wittified/build-status/CGRP-WEBHDFSM)](https://pandafood.mitre.org/browse/CGRP-WEBHDFSM)
-[![Test Coverage](`r img_path`)](https://pandafood.mitre.org/browse/CGRP-WEBHDFSM/latest/artifact/JOB1/covr_coverage_report/covr-report.html)
+[![Test Coverage](`r img_path`)](https://pandafood.mitre.org/artifact/CGRP-WEBHDFSM/JOB1/build-latest/covr_coverage_report/covr_report.html)
 
 Provide an interface to WebHDFS operations by leveraging configuration details from the `clusterconf` package.  This includes functions to facilitate listing directory contents, creating, renaming, or deleting directories.  These common commands have corresponding shortcut functions in this package (e.g. `hdfs_ls`, `hdfs_makedir`, `hdfs_rename`, `hdfs_delete`).
 

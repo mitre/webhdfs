@@ -1,3 +1,7 @@
+# webhdfs 0.0.7
+
+* Fix broken link in readme to full code coverage report
+
 # webhdfs 0.0.6
 
 * Adjust readme so pkgdown displays code coverage
