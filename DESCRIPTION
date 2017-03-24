@@ -11,6 +11,7 @@ Imports:
     httr,
     jsonlite
 Suggests: 
+    covr,
     data.table,
     dplyr,
     testthat
