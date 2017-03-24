@@ -1,3 +1,7 @@
+# webhdfs 0.0.5
+
+* Start tracking code coverage
+
 # webhdfs 0.0.4
 
 * Bug fix to build default user name when making, renaming, and deleting directories 
