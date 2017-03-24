@@ -1,6 +1,6 @@
 Package: webhdfs
 Title: Interface with WebHDFS Service in a Cluster-Neutral Way
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: person("Brendan", "Hogan", email = "bhogan@mitre.org", role = c("aut", "cre"))
 Description: Provide an interface to WebHDFS operations by leveraging
     configuration details from the clusterconf package.
@@ -17,4 +17,4 @@ Suggests:
 License: MITRE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

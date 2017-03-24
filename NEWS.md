@@ -1,3 +1,10 @@
+# webhdfs 0.0.4
+
+* Bug fix to build default user name when making, renaming, and deleting directories 
+* Bug fix where testing for an active namenode may fail for secure clusters requiring user name for GET commands 
+* Add additional function examples
+* Update docs to resolve linking issues
+
 # webhdfs 0.0.3
 
 * Bug fix to avoid needing to set return type after changing clusters
