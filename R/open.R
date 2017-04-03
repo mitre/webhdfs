@@ -21,16 +21,19 @@
 #' @param return_type character string. See \code{\link{set_return_type}} for
 #'   details and options.
 #'
-#' @return \code{data.frame} (or other requested type) containing output from
-#'   the WebHDFS operation
+#' @return \code{data.frame} (or other requested type) containing content from
+#'   the requested file path
 #' @seealso
 #' \url{http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/WebHDFS.html#Open_and_Read_a_File}
 #' for documentation of WebHDFS OPEN command and its parameters.
 #'
-#' @return
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' library(data.table)
+#' dat <- hdfs_open("/data/dummy.csv", handler = "fread")
+#' }
 hdfs_open <- function(path, handler,
                       offset_bytes = NULL, length_bytes = NULL, buffer_size = NULL,
                       user = get_user(),
@@ -39,8 +42,8 @@ hdfs_open <- function(path, handler,
 
   # build command for hdfs_get with OPEN command and any supplied options
   command <- paste0("OPEN",
-                    ifelse(!is.null(offset), paste0("&offset=", offset), ""),
-                    ifelse(!is.null(length), paste0("&length=", length), ""),
+                    ifelse(!is.null(offset_bytes), paste0("&offset=", offset_bytes), ""),
+                    ifelse(!is.null(length_bytes), paste0("&length=", length_bytes), ""),
                     ifelse(!is.null(buffer_size), paste0("&buffersize=", buffer_size), ""))
 
   dat <- hdfs_get(path, command, user = user, return_type = return_type, handler = handler)

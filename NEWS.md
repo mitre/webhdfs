@@ -1,3 +1,7 @@
+# webhdfs 0.0.8
+
+* Add hdfs_open function
+
 # webhdfs 0.0.7
 
 * Fix broken link in readme to full code coverage report

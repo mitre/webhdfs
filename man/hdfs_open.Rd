@@ -4,8 +4,8 @@
 \alias{hdfs_open}
 \title{Open and read a file}
 \usage{
-hdfs_open(path, offset = NULL, length = NULL, buffer_size = NULL,
-  handler = NULL, user = get_user(), return_type = get_return_type())
+hdfs_open(path, handler, offset_bytes = NULL, length_bytes = NULL,
+  buffer_size = NULL, user = get_user(), return_type = get_return_type())
 }
 \arguments{
 \item{path}{Character containing file system path}
@@ -15,6 +15,14 @@ incumbent on the user for this function to be available in the current
 session, and for the function to handle the type of data referenced by
 \code{path}.  This is passed on to \code{\link{hdfs_get}}.}
 
+\item{offset_bytes}{The starting position to be processed, in bytes.  Default
+(NULL) means start from the beginning of the file.}
+
+\item{length_bytes}{The number of bytes to be processed.  Default (NULL)
+means the entire file will be read.}
+
+\item{buffer_size}{The size of the buffer to be used in transferring data.}
+
 \item{user}{Character username to use in WebHDFS operation.  If not provided,
 \code{webhdfs.user} will be used and if that has not been set, a call to
 \code{\link{guess_user}} will be made.}
@@ -23,9 +31,19 @@ session, and for the function to handle the type of data referenced by
 details and options.}
 }
 \value{
-\code{data.frame} (or other requested type) containing output from
-  the WebHDFS operation
+\code{data.frame} (or other requested type) containing content from
+  the requested file path
 }
 \description{
 Shortcut to the WebHDFS OPEN command.
+}
+\examples{
+\dontrun{
+library(data.table)
+dat <- hdfs_open("/data/dummy.csv", handler = "fread")
+}
+}
+\seealso{
+\url{http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/WebHDFS.html#Open_and_Read_a_File}
+for documentation of WebHDFS OPEN command and its parameters.
 }
