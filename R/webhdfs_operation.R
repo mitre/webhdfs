@@ -20,6 +20,9 @@
 #'   'OPERATION&param1=value1&param2=value2'.
 #' @param return_type character string. See \code{\link{set_return_type}} for
 #'   details and options.
+#' @param handler Function to use when processing the result of the WebHFDS
+#'   operation.  If not provided, defaults to jsonlite::fromJSON, which handles
+#'   output from the vast majority of GET operations.
 #'
 #' @return \code{data.frame} (or other requested type) containing output from
 #'   the WebHDFS operation
@@ -39,14 +42,23 @@
 #' hdfs_put("/user/uid/newdir", "MKDIRS&permission=754")
 #' }
 #'
-hdfs_get <- function(path, operation, user = get_user(), return_type = get_return_type()) {
+hdfs_get <- function(path, operation, user = get_user(), return_type = get_return_type(),
+                     handler = NULL) {
 
   hdfs_path <- paste0(get_webhdfs_url(), path,
                       "?user.name=", user,
                       "&op=", operation)
 
-  dat_list <- fromJSON(content(GET(hdfs_path),
-                               as = "text", encoding = "UTF-8"))
+  # raw content from the WebHDFS command
+  dat_content <- content(GET(hdfs_path),
+                         as = "text", encoding = "UTF-8")
+
+  # convert content to a more usable form
+  if (is.null(handler)) {
+    dat_list <- fromJSON(dat_content)
+  } else {
+    dat_list <- do.call(handler, list(dat_content))
+  }
 
   dat <- unlist_carefully(dat_list)
 

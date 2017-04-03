@@ -6,7 +6,7 @@
 \title{Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation}
 \usage{
 hdfs_get(path, operation, user = get_user(),
-  return_type = get_return_type())
+  return_type = get_return_type(), handler = NULL)
 
 hdfs_put(path, operation, user = get_user())
 }
@@ -25,6 +25,10 @@ operation and each other with '&', such as
 
 \item{return_type}{character string. See \code{\link{set_return_type}} for
 details and options.}
+
+\item{handler}{Function to use when processing the result of the WebHFDS
+operation.  If not provided, defaults to jsonlite::fromJSON, which handles
+output from the vast majority of GET operations.}
 }
 \value{
 \code{data.frame} (or other requested type) containing output from
