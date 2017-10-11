@@ -94,7 +94,7 @@ set_webhdfs_suffix <- function(suffix) {
 #' @export
 #' @rdname set_name_node_url
 get_webhdfs_suffix <- function() {
-  suffix <- get_setting("webhdfs.cluster.webhdfs.suffix", NULL, param="suffix", scope="webhdfs", setter=set_webhdfs_port)
+  suffix <- get_setting("webhdfs.cluster.webhdfs.suffix", NULL, param="suffix", scope="webhdfs", setter=set_webhdfs_suffix)
   return(suffix)
 }
 
