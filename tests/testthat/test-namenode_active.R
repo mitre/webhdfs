@@ -34,6 +34,26 @@ test_that("active namenode is detected correctly", {
 
 
 
+test_that("is_namenode_active gives helpful error message when WebHDFS is not enabled on requested url", {
+  library(httr)
+
+  with_mock(
+    # mockup exception error from standby
+    `httr::content` = function(x, ...) {
+      return(
+        paste0(
+          '<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\"/>\n',
+          '<title>Error 404 NOT_FOUND</title>\n</head>\n<body><h2>HTTP ERROR 404</h2>\n',
+          '<p>Problem accessing /webhdfs/v1/. Reason:\n<pre>    NOT_FOUND</pre></p><hr />'
+        )
+      )},
+
+    expect_error(is_namenode_active("http://fakeurl"),
+                 "WebHDFS is not available at the requested url")
+  )
+})
+
+
 
 test_that("get_webhdfs_url works with single namenode", {
   # TODO
