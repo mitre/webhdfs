@@ -10,6 +10,47 @@ test_that("setting webhdfs port works", {
 })
 
 
+test_that("setting webhdfs suffix works", {
+
+  suffix_in <- "webhdfs/v1"
+
+  expect_silent(set_webhdfs_suffix(suffix_in))
+  expect_silent({suffix_out <- get_webhdfs_suffix()})
+  expect_equal(suffix_out, suffix_in)
+})
+
+
+test_that("setting namenode url works with single namenode", {
+
+  url_in <- "http://nn1.server.domain"
+
+  expect_silent(set_name_node_url(url_in))
+  expect_silent({url_out <- get_name_node_url()})
+  expect_equal(url_out, url_in)
+})
+
+
+test_that("setting namenode url works with two namenodes", {
+
+  url_in <- c("http://nn1.server.domain", "http://nn2.server.domain")
+
+  expect_silent(set_name_node_url(url_in))
+  expect_silent({url_out <- get_name_node_url()})
+  expect_equal(url_out, url_in)
+})
+
+
+test_that("setting cluster works", {
+
+  cluster_in <- "dummy cluster name"
+
+  expect_silent(set_cluster(cluster_in))
+  expect_silent({cluster_out <- get_cluster()})
+  expect_equal(cluster_out, cluster_in)
+})
+
+
+
 test_that("webhdfs port is unchanged by initial setting of return type", {
 
   # set port
