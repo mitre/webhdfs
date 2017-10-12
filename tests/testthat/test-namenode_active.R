@@ -38,7 +38,7 @@ test_that("is_namenode_active gives helpful error message when WebHDFS is not en
   library(httr)
 
   with_mock(
-    # mockup exception error from standby
+    # mockup 404 error from invalid webhdfs server
     `httr::content` = function(x, ...) {
       return(
         paste0(
@@ -54,13 +54,54 @@ test_that("is_namenode_active gives helpful error message when WebHDFS is not en
 })
 
 
-
 test_that("get_webhdfs_url works with single namenode", {
-  # TODO
+
+  with_mock(
+    # mockup relevant cluster config settings
+    get_name_node_url = function() { return("http://nn1.server.domain") }
+    get_webhdfs_port = function() { return("50070") }
+    get_webhdfs_suffix = function() { return("webhdfs/v1") }
+
+    # mockup namenode test
+    is_namenode_active = function(x) { return(TRUE) }
+
+    expect_equal("http://nn1.server.domain:50070/webhdfs/v1",
+                 get_webhdfs_url())
+  )
 })
 
 
 test_that("get_webhdfs_url works with array of namenodes", {
-  # TODO
+
+  with_mock(
+    # mockup relevant cluster config settings
+    get_name_node_url = function() { return(c("http://nn1.server.domain",
+                                              "http://nn2.server.domain")) }
+    get_webhdfs_port = function() { return("50070") }
+    get_webhdfs_suffix = function() { return("webhdfs/v1") }
+
+    # mockup namenode test
+    is_namenode_active = function(x) { return(TRUE) }
+
+    expect_equal("http://nn1.server.domain:50070/webhdfs/v1",
+                 get_webhdfs_url())
+  )
+})
+
+
+test_that("get_webhdfs_url works with an inactive namenode", {
+
+  with_mock(
+    # mockup relevant cluster config settings
+    get_name_node_url = function() { return("http://nn1.server.domain") }
+    get_webhdfs_port = function() { return("50070") }
+    get_webhdfs_suffix = function() { return("webhdfs/v1") }
+
+    # mockup namenode test
+    is_namenode_active = function(x) { return(FALSE) }
+
+    expect_warning(get_webhdfs_url(),
+                   "No active namenodes")
+  )
 })
 
