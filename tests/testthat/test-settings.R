@@ -41,14 +41,22 @@ test_that("setting namenode url works with two namenodes", {
 
 
 test_that("setting cluster works", {
+  library(clusterconf)
 
   cluster_in <- "dummy cluster name"
 
-  expect_silent(set_cluster(cluster_in))
+  with_mock(
+    # mockup valid response from active namenode
+    `clusterconf::get_cluster_configs` = function(x, ...) {
+      return("dummy")
+    },
+
+    expect_silent(set_cluster(cluster_in))
+  )
+
   expect_silent({cluster_out <- get_cluster()})
   expect_equal(cluster_out, cluster_in)
 })
-
 
 
 test_that("webhdfs port is unchanged by initial setting of return type", {
