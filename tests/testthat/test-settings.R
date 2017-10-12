@@ -97,3 +97,44 @@ test_that("webhdfs port is unchanged by changing a previous setting of return ty
 })
 
 
+test_that("setting user works", {
+
+  user_in <- "user1"
+
+  expect_silent(set_user(user_in))
+  expect_silent({user_out <- get_user()})
+  expect_equal(user_out, user_in)
+})
+
+
+test_that("guess user works", {
+
+  expected_user <- ifelse(.Platform$OS.type=="windows",
+                          tolower(Sys.getenv("USERNAME")),
+                          tolower(Sys.getenv("USER")))
+
+  expect_equal(guess_user(), expected_user)
+})
+
+
+test_that("set return type works", {
+
+  return_type_in <- "dummy.type"
+
+  with_mock(is_supported_return_type = function(x) TRUE,
+            expect_silent(set_return_type(return_type_in)),
+            expect_silent({return_type_out <- get_return_type()}),
+            expect_equal(return_type_in, return_type_out),
+            .env = "webhdfs")
+
+  # reset to default
+  set_return_type("data.frame")
+})
+
+
+test_that("set return type throws error with invalid input", {
+
+  return_type_in <- "dummy.type"
+  expect_error(set_return_type(return_type_in),
+               "The return type options are")
+})
