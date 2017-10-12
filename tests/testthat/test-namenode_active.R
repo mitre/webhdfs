@@ -55,6 +55,7 @@ test_that("is_namenode_active gives helpful error message when WebHDFS is not en
 
 
 test_that("get_webhdfs_url works with single namenode", {
+  reset_cache()
 
   # mockup relevant cluster config settings and namenode test
   with_mock(
@@ -70,6 +71,7 @@ test_that("get_webhdfs_url works with single namenode", {
 
 
 test_that("get_webhdfs_url works with array of namenodes", {
+  reset_cache()
 
   # mockup relevant cluster config settings and namenode test
   with_mock(
@@ -86,6 +88,7 @@ test_that("get_webhdfs_url works with array of namenodes", {
 
 
 test_that("get_webhdfs_url works with an inactive namenode", {
+  reset_cache()
 
   # mockup relevant cluster config settings and namenode test
   with_mock(
