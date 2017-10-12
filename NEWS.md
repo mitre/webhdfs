@@ -1,3 +1,8 @@
+# webhdfs 0.0.9
+
+* Bugfix on setting webhdfs configuration for port and url suffix
+* Increased test code coverage 
+
 # webhdfs 0.0.8
 
 * Add hdfs_open function
