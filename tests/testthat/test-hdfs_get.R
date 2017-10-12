@@ -46,7 +46,7 @@ test_that("hdfs_get throws warning with invalid path", {
         )
       )},
     get_webhdfs_url = function() "http://fakeurl",
-    expect_warning(hdfs_get("/")),
+    expect_warning(hdfs_get("/", "LISTSTATUS")),
     .env = "webhdfs"
   )
 
