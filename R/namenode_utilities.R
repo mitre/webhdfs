@@ -87,8 +87,17 @@ is_namenode_active <- function(webhdfs_url) {
                       "?user.name=", get_user(),
                       "&op=LISTSTATUS")
 
-  dat <- unlist_carefully(fromJSON(content(GET(test_url),
-                                           as = "text", encoding = "UTF-8")))
+  test_content <- content(GET(test_url),
+                          as = "text", encoding = "UTF-8")
+
+  # protect against non-json result from a server that is not providing WebHDFS services
+  if (startsWith(test_content, "<html>") &
+      grepl("Error 404", test_content, ignore.case = TRUE)) {
+    stop("WebHDFS is not available at the requested url: ",
+         webhdfs_url)
+  }
+
+  dat <- unlist_carefully(fromJSON(test_content))
 
   if ("exception" %in% names(dat)) {
     return(FALSE)
