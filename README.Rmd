@@ -6,22 +6,6 @@ output:
 
 # WebHDFS
 
-```{r build_coverage_badge_link, echo=FALSE}
-coverage_percent <- scan("https://pandafood.mitre.org/browse/CGRP-WEBHDFSM/latest/artifact/JOB1/coverage_percent/coverage_percent.txt", quiet = TRUE)
-
-# colors for:       <30     <50        <70      >70
-color_options <- c("red", "orange", "yellow", "green")
-color_idx <- findInterval(coverage_percent, c(30,50,70)) + 1
-img_path <- paste0("https://img.shields.io/badge/Test%20Coverage-", 
-                   coverage_percent, "%25-",   # url encode %25 needed to get %
-                   color_options[color_idx],
-                   ".svg")
-
-```
-
-[![Bamboo Build Status](https://pandafood.mitre.org/plugins/servlet/wittified/build-status/CGRP-WEBHDFSM)](https://pandafood.mitre.org/browse/CGRP-WEBHDFSM)
-[![Test Coverage](`r img_path`)](https://pandafood.mitre.org/artifact/CGRP-WEBHDFSM/JOB1/build-latest/covr_coverage_report/covr_report.html)
-
 Provide an interface to WebHDFS operations by leveraging configuration details from the `clusterconf` package.  This includes functions to facilitate listing directory contents, creating, renaming, or deleting directories.  These common commands have corresponding shortcut functions in this package (e.g. `hdfs_ls`, `hdfs_makedir`, `hdfs_rename`, `hdfs_delete`).
 
 For WebHDFS operations that do not have corresponding functions in this package, it is possible to issue many of those commands through the lower-level functions `hdfs_get` and `hdfs_put`.
@@ -34,13 +18,10 @@ This package dynamically builds the URL for WebHDFS services based on cluster se
 
 ## Installation
 
-The easiest way is to install the latest stable version from MCRAN. 
-Detailed instructions for this are [available](http://mcran.mitre.org/#install-using-install.packages-from-r-preferred) or you can use the snippet below.
+The easiest way is to install the latest development version from GitHub, for example with the `devtools` package. 
 
 ```{r, eval=FALSE}
-install.packages("webhdfs", 
-                 repos=c("https://artifacts.mitre.org/artifactory/cran1-remote",
-                         "http://mcran.mitre.org"))
+devtools::install_github("mitre/webhdfs")
 ```
 
 

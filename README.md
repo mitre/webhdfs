@@ -1,8 +1,6 @@
 WebHDFS
 =======
 
-[![Bamboo Build Status](https://pandafood.mitre.org/plugins/servlet/wittified/build-status/CGRP-WEBHDFSM)](https://pandafood.mitre.org/browse/CGRP-WEBHDFSM) [![Test Coverage](https://img.shields.io/badge/Test%20Coverage-16%25-red.svg)](https://pandafood.mitre.org/artifact/CGRP-WEBHDFSM/JOB1/build-latest/covr_coverage_report/covr_report.html)
-
 Provide an interface to WebHDFS operations by leveraging configuration details from the `clusterconf` package. This includes functions to facilitate listing directory contents, creating, renaming, or deleting directories. These common commands have corresponding shortcut functions in this package (e.g. `hdfs_ls`, `hdfs_makedir`, `hdfs_rename`, `hdfs_delete`).
 
 For WebHDFS operations that do not have corresponding functions in this package, it is possible to issue many of those commands through the lower-level functions `hdfs_get` and `hdfs_put`.
@@ -15,12 +13,10 @@ This package dynamically builds the URL for WebHDFS services based on cluster se
 Installation
 ------------
 
-The easiest way is to install the latest stable version from MCRAN. Detailed instructions for this are [available](http://mcran.mitre.org/#install-using-install.packages-from-r-preferred) or you can use the snippet below.
+The easiest way is to install the latest development version from GitHub, for example with the `devtools` package.
 
 ``` r
-install.packages("webhdfs", 
-                 repos=c("https://artifacts.mitre.org/artifactory/cran1-remote",
-                         "http://mcran.mitre.org"))
+devtools::install_github("mitre/webhdfs")
 ```
 
 Usage
