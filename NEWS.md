@@ -1,3 +1,7 @@
+# webhdfs 0.1.0
+
+* Initial version released to GitHub
+
 # webhdfs 0.0.9
 
 * Bugfix on setting webhdfs configuration for port and url suffix
