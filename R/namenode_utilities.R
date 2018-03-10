@@ -68,7 +68,7 @@ get_webhdfs_url <- function() {
 #' StandbyException from the test operation and return FALSE.  A successful test
 #' operation will cause this function to return TRUE.
 #'
-#' @importFrom jsonlite fromJSON
+#' @importFrom jsonlite fromJSON validate
 #' @importFrom httr GET content
 #' @param webhdfs_url Character containing full WebHDFS URL of the namenode to
 #'   test, including the port number and suffix
@@ -90,10 +90,20 @@ is_namenode_active <- function(webhdfs_url) {
   test_content <- content(GET(test_url),
                           as = "text", encoding = "UTF-8")
 
-  # protect against non-json result from a server that is not providing WebHDFS services
-  if (startsWith(test_content, "<html>") &
-      grepl("Error 404", test_content, ignore.case = TRUE)) {
-    stop("WebHDFS is not available at the requested url: ",
+  # protect against non-json result
+  if (!validate(test_content)) {
+
+    # server is not providing WebHDFS services
+    if (startsWith(test_content, "<html>") &
+        grepl("Error 404", test_content, ignore.case = TRUE)) {
+      error_msg <- "WebHDFS is not available at the requested url: "
+    } else if (grepl("DNS_FAIL", test_content)) {  # server could not be reached
+      error_msg <- "Host name resolution (DNS lookup) failed.  Requested url may be invalid or temporarily unavailable: "
+    } else {
+      error_msg <- "There was a problem with the requested url: "
+    }
+
+    stop(error_msg,
          webhdfs_url)
   }
 
