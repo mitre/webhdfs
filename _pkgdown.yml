@@ -3,11 +3,6 @@ templates:
     bootswatch: cerulean
 
 home:
-  links:
-  - text: Source
-    href: https://github.com/mitre/webhdfs
-  - text: Report a bug
-    href: https://github.com/mitre/webhdfs/issues
 
 reference:
   - title: WebHDFS Operations
@@ -22,7 +17,6 @@ reference:
     - starts_with("set_")
     - apply_default_configurations
     - guess_user
-    - is_supported_return_type
     - is_namenode_active
 
 navbar:
