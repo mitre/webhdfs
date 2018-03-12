@@ -5,7 +5,7 @@
 #' can add \code{setOption(param="value")} values in, for example, an .rProfile.
 #'
 #' @section options settings:
-#' In this section the various parameters that are used are defined. Note that all \code{soh}
+#' In this section the various parameters that are used are defined. Note that all \code{webhdfs}
 #' options will begin with \code{webhdfs.}
 #' \describe{
 #'   \item{webhdfs.return.type}{Specifies the flavor of \code{data.frame} returned when querying
@@ -77,8 +77,8 @@ get_setting <- function(varstr, value, allow_null=FALSE, param, scope, setter, .
 
   # friendly error message if nulls are not allowed
   if (!allow_null && is.null(value)) {
-    if (is_var(varstr))
-      setter_string <- paste0("the '", get_var_setter(varstr), "' function")
+    if (!missing(setter))
+      setter_string <- paste0("the '", substitute(setter), "' function")
     else
       setter_string <- "the appropriate 'set_*' function"
 
