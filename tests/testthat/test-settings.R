@@ -138,3 +138,9 @@ test_that("set return type throws error with invalid input", {
   expect_error(set_return_type(return_type_in),
                "The return type options are")
 })
+
+
+test_that("setter is referenced correctly by get function error message", {
+  expect_error(get_name_node_url(),
+               "set the parameter manually using the '[\\w]+' function", perl = TRUE)
+})
