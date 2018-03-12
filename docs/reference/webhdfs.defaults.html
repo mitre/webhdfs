@@ -125,7 +125,7 @@ can add <code>setOption(param="value")</code> values in, for example, an .rProfi
     <h2 class="hasAnchor" id="options-settings"><a class="anchor" href="#options-settings"></a>options settings</h2>
 
     
-    <p>In this section the various parameters that are used are defined. Note that all <code>soh</code>
+    <p>In this section the various parameters that are used are defined. Note that all <code>webhdfs</code>
 options will begin with <code>webhdfs.</code></p><dl class='dl-horizontal'>
   <dt>webhdfs.return.type</dt><dd><p>Specifies the flavor of <code>data.frame</code> returned when querying
         hive. Most R users are used to working with <code>data.frame</code> objects. However this function
@@ -141,6 +141,11 @@ options will begin with <code>webhdfs.</code></p><dl class='dl-horizontal'>
         of the computer user name. This should work for most people, but not all.
         If you are one of the lucky ones maintaining multiple (different) usernames
         then you should set this parameter before trying to use this package.</p></dd>
+  <dt>webhdfs.cluster.webhdfs.port</dt><dd><p>Specifies the name node web UI port, for use
+        in building the full WebHDFS URL.  This defaults to using the Hadoop default port 50070.</p></dd>
+  <dt>webhdfs.cluster.webhdfs.suffix</dt><dd><p>Specifies the standard suffix added to the name node
+        address and port number for accessing WebHDFS services.  This defaults to the Hadoop
+        standard 'webhdfs/v1'.</p></dd>
 </dl>
     
 

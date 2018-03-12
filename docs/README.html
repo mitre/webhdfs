@@ -89,6 +89,7 @@
 <div id="webhdfs" class="section level1">
 <h1 class="hasAnchor">
 <a href="#webhdfs" class="anchor"></a>WebHDFS</h1>
+<p><a href="https://travis-ci.org/mitre/webhdfs"><img src="https://travis-ci.org/mitre/webhdfs.svg?branch=master" alt="Build Status"></a></p>
 <p>Provide an interface to WebHDFS operations by leveraging configuration details from the <code>clusterconf</code> package. This includes functions to facilitate listing directory contents, creating, renaming, or deleting directories. These common commands have corresponding shortcut functions in this package (e.g. <code>hdfs_ls</code>, <code>hdfs_makedir</code>, <code>hdfs_rename</code>, <code>hdfs_delete</code>).</p>
 <p>For WebHDFS operations that do not have corresponding functions in this package, it is possible to issue many of those commands through the lower-level functions <code>hdfs_get</code> and <code>hdfs_put</code>.</p>
 <div id="requirements" class="section level2">

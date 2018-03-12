@@ -33,7 +33,7 @@ can add \code{setOption(param="value")} values in, for example, an .rProfile.
 }
 \section{options settings}{
 
-In this section the various parameters that are used are defined. Note that all \code{soh}
+In this section the various parameters that are used are defined. Note that all \code{webhdfs}
 options will begin with \code{webhdfs.}
 \describe{
   \item{webhdfs.return.type}{Specifies the flavor of \code{data.frame} returned when querying
@@ -50,6 +50,11 @@ options will begin with \code{webhdfs.}
         of the computer user name. This should work for most people, but not all.
         If you are one of the lucky ones maintaining multiple (different) usernames
         then you should set this parameter before trying to use this package.}
+  \item{webhdfs.cluster.webhdfs.port}{Specifies the name node web UI port, for use
+        in building the full WebHDFS URL.  This defaults to using the Hadoop default port 50070.}
+  \item{webhdfs.cluster.webhdfs.suffix}{Specifies the standard suffix added to the name node
+        address and port number for accessing WebHDFS services.  This defaults to the Hadoop
+        standard 'webhdfs/v1'.}
 }
 }
 

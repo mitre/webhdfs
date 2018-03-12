@@ -144,3 +144,13 @@ test_that("setter is referenced correctly by get function error message", {
   expect_error(get_name_node_url(),
                "set the parameter manually using the '[\\w]+' function", perl = TRUE)
 })
+
+
+test_that("default webhdfs port works", {
+  expect_equal(get_webhdfs_port(), "50070")
+})
+
+
+test_that("default webhdfs suffix works", {
+  expect_equal(get_webhdfs_suffix(), "webhdfs/v1")
+})

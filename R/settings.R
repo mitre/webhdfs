@@ -22,6 +22,11 @@
 #'         of the computer user name. This should work for most people, but not all.
 #'         If you are one of the lucky ones maintaining multiple (different) usernames
 #'         then you should set this parameter before trying to use this package.}
+#'   \item{webhdfs.cluster.webhdfs.port}{Specifies the name node web UI port, for use
+#'         in building the full WebHDFS URL.  This defaults to using the Hadoop default port 50070.}
+#'   \item{webhdfs.cluster.webhdfs.suffix}{Specifies the standard suffix added to the name node
+#'         address and port number for accessing WebHDFS services.  This defaults to the Hadoop
+#'         standard 'webhdfs/v1'.}
 #' }
 #'
 #' @param return_type character string, must be one of \code{"data.frame", "data.table", "tbl"}
@@ -36,6 +41,11 @@ apply_default_configurations <- function() {
   # username
   set_default("webhdfs.user", guess_user(), "set_user")
 
+  # webhdfs port
+  set_default("webhdfs.cluster.webhdfs.port", "50070", "set_webhdfs_port")
+
+  # webhdfs suffix
+  set_default("webhdfs.cluster.webhdfs.suffix", "webhdfs/v1", "set_webhdfs_suffix")
 }
 
 #' Setting getter

@@ -1,5 +1,7 @@
 # webhdfs 0.1.0
 
+* Bug fix on error message when required setting is not available
+* Add default values for WebHDFS port and suffix for URL
 * Initial version released to GitHub
 
 # webhdfs 0.0.9

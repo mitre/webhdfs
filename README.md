@@ -36,13 +36,11 @@ set_cluster("my cluster name")
 hdfs_ls("/data/")
 ```
 
-The above example requires that a `clusterconf` package for `my cluster name` (e.g. `clusterconf.myclustername`) exists and has already been installed. If such a package does not exist, the same capability can be achieved manually with a couple more steps as shown below. Suppose that my cluster has its primary namenode at `mycluster-nn1.mydomain.com` and its backup namenode at `mycluster-nn2.mydomain.com`. Also suppose that WebHDFS is enabled at port `50070` with the standard URL suffix `webhdfs/v1`. Then the following commands will reproduce the capability of the block above.
+The above example requires that a `clusterconf` package for `my cluster name` (e.g. `clusterconf.myclustername`) exists and has already been installed. If such a package does not exist, the same capability can be achieved manually by setting the name node url(s) as shown below. Suppose that my cluster has its primary namenode at `mycluster-nn1.mydomain.com` and its backup namenode at `mycluster-nn2.mydomain.com`. (Also assume that WebHDFS is enabled at the default port `50070` with the standard URL suffix `webhdfs/v1`.) Then the following commands will reproduce the capability of the block above.
 
 ``` r
 library(webhdfs)
-set_name_node_url(c("mycluster-nn1.mydomain.com",
-                    "mycluster-nn2.mydomain.com"))
-set_webhdfs_port(50070)
-set_webhdfs_suffix("webhdfs/v1")
+set_name_node_url(c("http://mycluster-nn1.mydomain.com",
+                    "http://mycluster-nn2.mydomain.com"))
 hdfs_ls("/data/")
 ```
