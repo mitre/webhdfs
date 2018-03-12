@@ -112,12 +112,10 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(webhdfs)
 <span class="kw"><a href="reference/set_cluster.html">set_cluster</a></span>(<span class="st">"my cluster name"</span>)
 <span class="kw"><a href="reference/hdfs_ls.html">hdfs_ls</a></span>(<span class="st">"/data/"</span>)</code></pre></div>
-<p>The above example requires that a <code>clusterconf</code> package for <code>my cluster name</code> (e.g. <code>clusterconf.myclustername</code>) exists and has already been installed. If such a package does not exist, the same capability can be achieved manually with a couple more steps as shown below. Suppose that my cluster has its primary namenode at <code>mycluster-nn1.mydomain.com</code> and its backup namenode at <code>mycluster-nn2.mydomain.com</code>. Also suppose that WebHDFS is enabled at port <code>50070</code> with the standard URL suffix <code>webhdfs/v1</code>. Then the following commands will reproduce the capability of the block above.</p>
+<p>The above example requires that a <code>clusterconf</code> package for <code>my cluster name</code> (e.g. <code>clusterconf.myclustername</code>) exists and has already been installed. If such a package does not exist, the same capability can be achieved manually by setting the name node url(s) as shown below. Suppose that my cluster has its primary namenode at <code>mycluster-nn1.mydomain.com</code> and its backup namenode at <code>mycluster-nn2.mydomain.com</code>. (Also assume that WebHDFS is enabled at the default port <code>50070</code> with the standard URL suffix <code>webhdfs/v1</code>.) Then the following commands will reproduce the capability of the block above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(webhdfs)
-<span class="kw"><a href="reference/set_name_node_url.html">set_name_node_url</a></span>(<span class="kw">c</span>(<span class="st">"mycluster-nn1.mydomain.com"</span>,
-                    <span class="st">"mycluster-nn2.mydomain.com"</span>))
-<span class="kw"><a href="reference/set_name_node_url.html">set_webhdfs_port</a></span>(<span class="dv">50070</span>)
-<span class="kw"><a href="reference/set_name_node_url.html">set_webhdfs_suffix</a></span>(<span class="st">"webhdfs/v1"</span>)
+<span class="kw"><a href="reference/set_name_node_url.html">set_name_node_url</a></span>(<span class="kw">c</span>(<span class="st">"http://mycluster-nn1.mydomain.com"</span>,
+                    <span class="st">"http://mycluster-nn2.mydomain.com"</span>))
 <span class="kw"><a href="reference/hdfs_ls.html">hdfs_ls</a></span>(<span class="st">"/data/"</span>)</code></pre></div>
 </div>
 </div>

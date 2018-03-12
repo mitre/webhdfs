@@ -1,7 +1,7 @@
 WebHDFS
 ================
 
-[![Build Status](https://travis-ci.org/mitre/webhdfs.svg?branch=master)](https://travis-ci.org/mitre/webhdfs)
+[![Build Status](https://travis-ci.org/mitre/webhdfs.svg?branch=master)](https://travis-ci.org/mitre/webhdfs) [![Coverage Status](https://coveralls.io/repos/github/mitre/webhdfs/badge.svg?branch=master)](https://coveralls.io/github/mitre/webhdfs?branch=master)
 
 Provide an interface to WebHDFS operations by leveraging configuration details from the `clusterconf` package. This includes functions to facilitate listing directory contents, creating, renaming, or deleting directories. These common commands have corresponding shortcut functions in this package (e.g. `hdfs_ls`, `hdfs_makedir`, `hdfs_rename`, `hdfs_delete`).
 
