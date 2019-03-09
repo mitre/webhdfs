@@ -29,8 +29,6 @@ get_webhdfs_suffix()
 \item{suffix}{Character containing suffix for WebHDFS service}
 }
 \description{
-Manually specify cluster settings for namenode
-
 \code{port} is used in building the full WebHDFS URL, in combination with
 the namenode and suffix
 
