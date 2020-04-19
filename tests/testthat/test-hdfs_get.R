@@ -8,8 +8,6 @@ test_that("hdfs_get works with GETFILESTATUS", {
 
 
 test_that("hdfs_get works with LISTSTATUS and valid path", {
-  library(httr)
-
   with_mock(
     # mockup exception error when file not found
     `httr::content` = function(x, ...) {
@@ -32,9 +30,6 @@ test_that("hdfs_get works with LISTSTATUS and valid path", {
 
 
 test_that("hdfs_get throws warning with invalid path", {
-
-  library(httr)
-
   with_mock(
     # mockup exception error when file not found
     `httr::content` = function(x, ...) {

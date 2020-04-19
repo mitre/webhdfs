@@ -1,8 +1,6 @@
 context("namenode_utilities")
 
 test_that("standby namenode is detected correctly", {
-  library(httr)
-
   with_mock(
     # mockup exception error from standby
     `httr::content` = function(x, ...) {
@@ -20,8 +18,6 @@ test_that("standby namenode is detected correctly", {
 
 
 test_that("active namenode is detected correctly", {
-  library(httr)
-
   with_mock(
     # mockup valid response from active namenode
     `httr::content` = function(x, ...) {
@@ -35,8 +31,6 @@ test_that("active namenode is detected correctly", {
 
 
 test_that("is_namenode_active gives helpful error message when WebHDFS is not enabled on requested url", {
-  library(httr)
-
   with_mock(
     # mockup 404 error from invalid webhdfs server
     `httr::content` = function(x, ...) {
