@@ -12,7 +12,8 @@ Depends:
 Imports:
     clusterconf,
     httr,
-    jsonlite
+    jsonlite,
+    methods
 Suggests: 
     data.table,
     dplyr,

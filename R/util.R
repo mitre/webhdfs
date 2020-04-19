@@ -1,5 +1,5 @@
 
-
+#' @importFrom methods as
 format_return <- function(dat, return_type){
   if (return_type=="data.frame") {
     return(dat)
@@ -9,7 +9,7 @@ format_return <- function(dat, return_type){
   } else if (return_type=="tbl") {
     return(dplyr::as.tbl(dat))
   } else
-    return(as(object = dat, Class = return_type))
+    return(methods::as(object = dat, Class = return_type))
 }
 
 
