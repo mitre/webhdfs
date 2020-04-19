@@ -14,11 +14,8 @@ Imports:
     httr,
     jsonlite
 Suggests: 
-    covr,
     data.table,
     dplyr,
-    DT,
-    shiny,
     testthat
 License: Apache License 2.0 | file LICENSE
 Remotes: 
