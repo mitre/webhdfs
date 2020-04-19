@@ -27,9 +27,7 @@ format_return <- function(dat, return_type){
 hdfs_timestamp_to_posix <- function(x) {
   return(as.POSIXct(as.numeric(x)/1000,
                     tz="UTC", origin="1970-01-01", format="%s"))
-
 }
-
 
 
 #' Unlist an object to the innermost \code{data.frame}
