@@ -5,8 +5,13 @@
 \alias{hdfs_put}
 \title{Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation}
 \usage{
-hdfs_get(path, operation, user = get_user(),
-  return_type = get_return_type(), handler = NULL)
+hdfs_get(
+  path,
+  operation,
+  user = get_user(),
+  return_type = get_return_type(),
+  handler = NULL
+)
 
 hdfs_put(path, operation, user = get_user())
 }

@@ -4,9 +4,15 @@
 \alias{hdfs_open}
 \title{Open and read a file}
 \usage{
-hdfs_open(path, handler, offset_bytes = NULL, length_bytes = NULL,
-  buffer_size = NULL, user = get_user(),
-  return_type = get_return_type())
+hdfs_open(
+  path,
+  handler,
+  offset_bytes = NULL,
+  length_bytes = NULL,
+  buffer_size = NULL,
+  user = get_user(),
+  return_type = get_return_type()
+)
 }
 \arguments{
 \item{path}{Character containing file system path}

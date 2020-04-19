@@ -5,8 +5,13 @@
 \alias{clean_liststatus_columns}
 \title{List a directory}
 \usage{
-hdfs_ls(path, recursive = FALSE, concise = FALSE, user = get_user(),
-  return_type = get_return_type())
+hdfs_ls(
+  path,
+  recursive = FALSE,
+  concise = FALSE,
+  user = get_user(),
+  return_type = get_return_type()
+)
 
 clean_liststatus_columns(dat)
 }
