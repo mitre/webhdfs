@@ -1,6 +1,6 @@
 set_var <- function(varstr, val, caller, check=TRUE) {
 
-  if (check && (missing(val) || is.null(val) || is.na(val))) {
+  if (check && (missing(val) || is.null(val) || any(is.na(val)))) {
     val <- NULL
   }
 
