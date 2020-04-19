@@ -139,9 +139,9 @@ set_return_type <- function(return_type) {
     set_var("webhdfs.return.type", return_type)
 
   # check dependent packages
-  if (return_type=="data.table" && !require("data.table")) {
+  if (return_type=="data.table" && !requireNamespace("data.table")) {
     stop("To use the data.table return type, the 'data.table' package must be installed")
-  } else if (return_type=="tbl" && !require("dplyr"))
+  } else if (return_type=="tbl" && !requireNamespace("dplyr"))
     stop("To use the tbl return type, the 'dplyr' package must be installed")
 }
 
