@@ -7,7 +7,7 @@ format_return <- function(dat, return_type){
     data.table::setDT(dat)
     return(dat)
   } else if (return_type=="tbl") {
-    return(dplyr::as.tbl(dat))
+    return(tibble::as_tibble(dat))
   } else
     return(methods::as(object = dat, Class = return_type))
 }

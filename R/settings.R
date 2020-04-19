@@ -141,8 +141,8 @@ set_return_type <- function(return_type) {
   # check dependent packages
   if (return_type=="data.table" && !requireNamespace("data.table")) {
     stop("To use the data.table return type, the 'data.table' package must be installed")
-  } else if (return_type=="tbl" && !requireNamespace("dplyr"))
-    stop("To use the tbl return type, the 'dplyr' package must be installed")
+  } else if (return_type=="tbl" && !requireNamespace("tibble"))
+    stop("To use the tbl return type, the 'tibble' package must be installed")
 }
 
 is_supported_return_type <- function(return_type, stop_if_not=TRUE) {

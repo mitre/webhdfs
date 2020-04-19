@@ -15,9 +15,10 @@ Imports:
     jsonlite,
     methods
 Suggests: 
+    covr,
     data.table,
-    dplyr,
-    testthat
+    testthat,
+    tibble
 License: Apache License 2.0 | file LICENSE
 Remotes: 
     mitre/clusterconf

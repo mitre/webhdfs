@@ -38,14 +38,12 @@ test_that("clean_liststatus_columns works with tbl", {
   colnames(sample_ls_result) <- c("accessTime", "blockSize", "childrenNum", "fileId", "group",
                                   "length", "modificationTime", "owner", "pathSuffix", "permission",
                                   "replication", "storagePolicy", "type")
-  sample_ls_result <- dplyr::as.tbl(sample_ls_result)
+  sample_ls_result <- tibble::as_tibble(sample_ls_result)
 
   expect_silent({dat <- clean_liststatus_columns(sample_ls_result)})
   expect_equal(dim(dat), c(1,8))
   expect_equal(names(dat), c("pathSuffix", "childrenNum", "length", "group",
                              "modificationTime", "owner", "permission", "type"))
-
-
 })
 
 
