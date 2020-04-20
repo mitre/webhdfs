@@ -1,6 +1,4 @@
 
-
-
 #' Generic functions to perform HTTP GET or PUT requests of a WebHDFS operation
 #'
 #' The full URL is built from the base WebHDFS URL via the
@@ -73,26 +71,5 @@ hdfs_get <- function(path, operation, user = get_user(), return_type = get_retur
   }
 
   format_return(dat, return_type)
-}
-
-
-
-#' @importFrom jsonlite fromJSON
-#' @importFrom httr PUT content
-#' @param user Character username to use in WebHDFS operation.  If not provided,
-#'   \code{webhdfs.user} will be used and if that has not been set, a call to
-#'   \code{\link{guess_user}} will be made.
-#' @export
-#' @rdname hdfs_get
-#'
-hdfs_put <- function(path, operation, user = get_user()) {
-
-  hdfs_path <- paste0(get_webhdfs_url(), path,
-                      "?user.name=", user,
-                      "&op=", operation)
-
-  result <- fromJSON(content(PUT(hdfs_path),
-                             as = "text", encoding = "UTF-8"))
-  return(result)
 }
 
