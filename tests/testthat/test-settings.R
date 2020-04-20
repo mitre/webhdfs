@@ -116,6 +116,16 @@ test_that("guess user works", {
   expect_equal(guess_user(), expected_user)
 })
 
+test_that("set_user guesses the user if not provided", {
+  expected_user <- ifelse(.Platform$OS.type=="windows",
+                          tolower(Sys.getenv("USERNAME")),
+                          tolower(Sys.getenv("USER")))
+
+  expect_silent(set_user())
+  expect_silent({user_out <- get_user()})
+  expect_equal(user_out, expected_user)
+})
+
 
 test_that("set return type works", {
 
@@ -133,9 +143,7 @@ test_that("set return type works", {
 
 
 test_that("set return type throws error with invalid input", {
-
-  return_type_in <- "dummy.type"
-  expect_error(set_return_type(return_type_in),
+  expect_error(set_return_type("dummy.type"),
                "The return type options are")
 })
 
