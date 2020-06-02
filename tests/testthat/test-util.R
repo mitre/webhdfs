@@ -36,6 +36,6 @@ test_that("format_return works with something else", {
 
   dat_out <- webhdfs:::format_return(dat_in, "matrix")
   expect_equal(dat_out, as.matrix(dat_in))
-  expect_equal(class(dat_out), "matrix")
+  expect_true("matrix" %in% class(dat_out))
 })
 
