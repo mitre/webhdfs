@@ -53,7 +53,10 @@ test_that("clean_liststatus_columns works with tbl", {
 
 
 test_that("hdfs_ls converts time fields", {
-  with_mock(
+  with_mocked_bindings(
+    expect_equal(hdfs_ls("/data/")$modificationTime,
+                 hdfs_timestamp_to_posix(c(1539712265888, 1539712482283, 1587281681146))),
+
     hdfs_get = function(path, operation, user = get_user(),
                         return_type = get_return_type(), handler = NULL) {
       structure(list(accessTime = c(0L, 0L, 0L),
@@ -71,14 +74,15 @@ test_that("hdfs_ls converts time fields", {
                      type = c("DIRECTORY", "DIRECTORY", "DIRECTORY")),
                 class = "data.frame",
                 row.names = c(NA, -3L))
-    },
-    expect_equal(hdfs_ls("/data/")$modificationTime,
-                 hdfs_timestamp_to_posix(c(1539712265888, 1539712482283, 1587281681146)))
+    }
   )
 })
 
 test_that("hdfs_ls optionally returns a concise format", {
-  with_mock(
+  with_mocked_bindings(
+    expect_equal(dim(hdfs_ls("/data/", concise = TRUE)),
+                 c(3, 8)),
+
     hdfs_get = function(path, operation, user = get_user(),
                         return_type = get_return_type(), handler = NULL) {
       structure(list(accessTime = c(0L, 0L, 0L),
@@ -96,9 +100,7 @@ test_that("hdfs_ls optionally returns a concise format", {
                      type = c("DIRECTORY", "DIRECTORY", "DIRECTORY")),
                 class = "data.frame",
                 row.names = c(NA, -3L))
-    },
-    expect_equal(dim(hdfs_ls("/data/", concise = TRUE)),
-                 c(3, 8))
+    }
   )
 })
 

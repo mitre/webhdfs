@@ -45,13 +45,13 @@ test_that("setting cluster works", {
 
   cluster_in <- "dummy cluster name"
 
-  with_mock(
-    # mockup valid response from active namenode
-    `clusterconf::get_cluster_configs` = function(x, ...) {
-      return("dummy")
-    },
+  with_mocked_bindings(
+    expect_silent(set_cluster(cluster_in)),
 
-    expect_silent(set_cluster(cluster_in))
+    # mockup valid response from active namenode
+    get_cluster_configs = function(x, ...) {
+      return("dummy")
+    }
   )
 
   expect_silent({cluster_out <- get_cluster()})
@@ -131,11 +131,15 @@ test_that("set return type works", {
 
   return_type_in <- "dummy.type"
 
-  with_mock(is_supported_return_type = function(x) TRUE,
-            expect_silent(set_return_type(return_type_in)),
-            expect_silent({return_type_out <- get_return_type()}),
-            expect_equal(return_type_in, return_type_out),
-            .env = "webhdfs")
+  with_mocked_bindings(
+    {
+      expect_silent(set_return_type(return_type_in))
+      expect_silent({return_type_out <- get_return_type()})
+      expect_equal(return_type_in, return_type_out)
+    },
+
+    is_supported_return_type = function(x) TRUE
+  )
 
   # reset to default
   set_return_type("data.frame")
