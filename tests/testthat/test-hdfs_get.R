@@ -6,11 +6,15 @@ test_that("hdfs_get works with GETFILESTATUS", {
 })
 
 
-
 test_that("hdfs_get works with LISTSTATUS and valid path", {
-  with_mock(
+  with_mocked_bindings(
+    {
+      expect_silent({dat <- hdfs_get("/", "LISTSTATUS")})
+      expect_equal(dim(dat), c(2, 13))
+    },
+
     # mockup exception error when file not found
-    `httr::content` = function(x, ...) {
+    content = function(x, ...) {
       return(
         paste0(
           "{\"FileStatuses\":{\"FileStatus\":[\n{\"accessTime\":0,\"blockSize\":0,\"childrenNum\":1,",
@@ -21,18 +25,17 @@ test_that("hdfs_get works with LISTSTATUS and valid path", {
           "\"replication\":0,\"storagePolicy\":0,\"type\":\"DIRECTORY\"}\n]}}\n"
         )
       )},
-    get_webhdfs_url = function() "http://fakeurl",
-    expect_silent({dat <- hdfs_get("/", "LISTSTATUS")}),
-    expect_equal(dim(dat), c(2, 13)),
-    .env = "webhdfs"
+    get_webhdfs_url = function() "http://fakeurl"
   )
 })
 
 
 test_that("hdfs_get throws warning with invalid path", {
-  with_mock(
+  with_mocked_bindings(
+    expect_warning(hdfs_get("/", "LISTSTATUS")),
+
     # mockup exception error when file not found
-    `httr::content` = function(x, ...) {
+    content = function(x, ...) {
       return(
         paste0(
           "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",",
@@ -41,10 +44,7 @@ test_that("hdfs_get throws warning with invalid path", {
         )
       )},
     get_webhdfs_url = function() "http://fakeurl",
-    expect_warning(hdfs_get("/", "LISTSTATUS")),
-    .env = "webhdfs"
   )
-
 })
 
 
