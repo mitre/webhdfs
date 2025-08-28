@@ -2,13 +2,27 @@ context("settings")
 
 test_that("setting webhdfs port works", {
 
-  port_in <- "50070"
+  port_in <- "1234"
 
   expect_silent(set_webhdfs_port(port_in))
   expect_silent({port_out <- get_webhdfs_port()})
   expect_equal(port_out, port_in)
 })
 
+
+test_that("resetting cache works", {
+  port_in <- "5678"
+  set_webhdfs_port(port_in)
+
+  # return value is as expected
+  port_out <- get_webhdfs_port()
+  expect_equal(port_out, port_in)
+
+  # attempting to get throws an error
+  reset_cache()
+  expect_error({get_webhdfs_port()},
+               "The required setting 'webhdfs.cluster.webhdfs.port' is not set.")
+})
 
 test_that("setting webhdfs suffix works", {
 
@@ -158,11 +172,32 @@ test_that("setter is referenced correctly by get function error message", {
 })
 
 
-test_that("default webhdfs port works", {
-  expect_equal(get_webhdfs_port(), "50070")
+test_that("default return type works", {
+  expect_equal(get_return_type(), "data.frame")
 })
 
 
-test_that("default webhdfs suffix works", {
+test_that("cluster config port and suffix settings get used properly", {
+  # no value to start
+  reset_cache()
+  expect_error({get_webhdfs_port()},
+               "The required setting 'webhdfs.cluster.webhdfs.port' is not set.")
+  expect_error({get_webhdfs_suffix()},
+               "The required setting 'webhdfs.cluster.webhdfs.suffix' is not set.")
+
+  # setup test cluster config
+  tmp_config_fn <- tempfile(fileext = ".yaml")
+  tmp_config_contents <- '
+default:
+  webhdfs:
+    port: "9876"
+    suffix: "webhdfs/v1"
+'
+  cat(tmp_config_contents, file = tmp_config_fn)
+  set_cluster("test", tmp_config_fn)
+
+  # test port and suffix again
+  expect_equal(get_webhdfs_port(), "9876")
   expect_equal(get_webhdfs_suffix(), "webhdfs/v1")
 })
+

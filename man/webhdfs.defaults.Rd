@@ -29,7 +29,7 @@ guess_user()
 \description{
 There are many different configurations that are possible. Generally however it is easiest to use
 one of the \code{clusterconf.*} packages to manage these. To set any configurations permanently one
-can add \code{setOption(param="value")} values in, for example, an .rProfile.
+can add \code{setOption(param="value")} values in, for example, an .Rprofile file.
 }
 \section{options settings}{
 
@@ -50,11 +50,6 @@ options will begin with \code{webhdfs.}
         of the computer user name. This should work for most people, but not all.
         If you are one of the lucky ones maintaining multiple (different) usernames
         then you should set this parameter before trying to use this package.}
-  \item{webhdfs.cluster.webhdfs.port}{Specifies the name node web UI port, for use
-        in building the full WebHDFS URL.  This defaults to using the Hadoop default port 50070.}
-  \item{webhdfs.cluster.webhdfs.suffix}{Specifies the standard suffix added to the name node
-        address and port number for accessing WebHDFS services.  This defaults to the Hadoop
-        standard 'webhdfs/v1'.}
 }
 }
 
