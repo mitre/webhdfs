@@ -7,6 +7,8 @@
 \alias{set_user}
 \alias{get_user}
 \alias{guess_user}
+\alias{set_ssl_verify}
+\alias{get_ssl_verify}
 \title{WebHDFS Options}
 \usage{
 apply_default_configurations()
@@ -20,11 +22,17 @@ set_user(user = NULL)
 get_user()
 
 guess_user()
+
+set_ssl_verify(verify = TRUE)
+
+get_ssl_verify()
 }
 \arguments{
 \item{return_type}{character string, must be one of \code{"data.frame", "data.table", "tbl"}}
 
 \item{user}{character string, hadoop user name}
+
+\item{verify}{Logical indicator of whether to use SSL verification}
 }
 \description{
 There are many different configurations that are possible. Generally however it is easiest to use
@@ -50,6 +58,10 @@ options will begin with \code{webhdfs.}
         of the computer user name. This should work for most people, but not all.
         If you are one of the lucky ones maintaining multiple (different) usernames
         then you should set this parameter before trying to use this package.}
+  \item{webhdfs.sslverify}{Indicates whether to use SSL verification in GET requests.  
+        For example, if there is a self-signed certificate in the chain it may be 
+        necessary to set this to \code{FALSE}.  Doing so is the equivalent of issuing 
+        a \code{curl} command with the \code{--insecure} option.}
 }
 }
 

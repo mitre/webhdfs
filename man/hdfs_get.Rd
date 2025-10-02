@@ -47,6 +47,9 @@ The full URL is built from the base WebHDFS URL via the
 \details{
 If the WebHDFS command returns an exception, this function issues a warning
 containing the exception message and returns an empty \code{data.frame}.
+
+If it is necessary to disable SSL verification for requests, it can be done 
+by calling \code{\link{set_ssl_verify}(FALSE)} prior to calling this function.
 }
 \examples{
 \dontrun{

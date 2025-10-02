@@ -167,8 +167,12 @@ test_that("set return type throws error with invalid input", {
 
 
 test_that("setter is referenced correctly by get function error message", {
-  expect_error(get_name_node_url(),
-               "set the parameter manually using the '[\\w]+' function", perl = TRUE)
+  with_mocked_bindings(
+    expect_error(get_setting("webhdfs.dummy", NULL, param="dummy", scope="", setter=set_dummy),
+                "set the parameter manually using the 'set_dummy' function"),
+
+    get_cluster_param = function(configs, param, scope, ...) NULL
+  )
 })
 
 
@@ -201,3 +205,18 @@ default:
   expect_equal(get_webhdfs_suffix(), "webhdfs/v1")
 })
 
+
+test_that("SSL verification is used by default", {
+  # no value to start
+  reset_cache()
+  expect_true({get_ssl_verify()})
+})
+
+
+test_that("turning off SSL verification works", {
+  # no value to start
+  reset_cache()
+
+  expect_silent({set_ssl_verify(FALSE)})
+  expect_false({get_ssl_verify()})
+})

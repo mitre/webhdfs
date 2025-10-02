@@ -22,6 +22,10 @@
 #'         of the computer user name. This should work for most people, but not all.
 #'         If you are one of the lucky ones maintaining multiple (different) usernames
 #'         then you should set this parameter before trying to use this package.}
+#'   \item{webhdfs.sslverify}{Indicates whether to use SSL verification in GET requests.  
+#'         For example, if there is a self-signed certificate in the chain it may be 
+#'         necessary to set this to \code{FALSE}.  Doing so is the equivalent of issuing 
+#'         a \code{curl} command with the \code{--insecure} option.}
 #' }
 #'
 #' @param return_type character string, must be one of \code{"data.frame", "data.table", "tbl"}
@@ -178,3 +182,27 @@ guess_user <- function(){
   else
     return(tolower(Sys.getenv("USER")))
 }
+
+
+#' @param verify Logical indicator of whether to use SSL verification
+#' @export
+#' @rdname webhdfs.defaults
+set_ssl_verify <- function(verify = TRUE) {
+  if (is.logical(verify))
+    set_var("webhdfs.sslverify", verify)
+  else
+    stop("Expected TRUE or FALSE for whether to use SSL verification in curl requests")
+}
+
+#' @export
+#' @rdname webhdfs.defaults
+get_ssl_verify <- function() {
+  tmp_verify <- get_setting("webhdfs.sslverify", NULL, allow_null = TRUE, setter = set_ssl_verify)
+
+  # default to TRUE if not set
+  if (is.null(tmp_verify))
+    return(TRUE)
+  else 
+    return(tmp_verify)
+}
+

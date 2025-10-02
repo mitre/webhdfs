@@ -7,6 +7,9 @@
 #'
 #' If the WebHDFS command returns an exception, this function issues a warning
 #' containing the exception message and returns an empty \code{data.frame}.
+#' 
+#' If it is necessary to disable SSL verification for requests, it can be done 
+#' by calling \code{\link{set_ssl_verify}(FALSE)} prior to calling this function.
 #'
 #' @importFrom jsonlite fromJSON
 #' @importFrom httr GET content
@@ -48,8 +51,7 @@ hdfs_get <- function(path, operation, user = get_user(), return_type = get_retur
                       "&op=", operation)
 
   # raw content from the WebHDFS command
-  dat_content <- content(GET(hdfs_path),
-                         as = "text", encoding = "UTF-8")
+  dat_content <- get_url_content(hdfs_path)
 
   # convert content to a more usable form
   if (is.null(handler)) {
@@ -73,3 +75,32 @@ hdfs_get <- function(path, operation, user = get_user(), return_type = get_retur
   format_return(dat, return_type)
 }
 
+
+#' Utility wrapper around httr::GET
+#' 
+#' Handle any additional configuration specified in package settings
+#' 
+#' @importFrom httr GET content
+#'
+#' @param url Character containing URL to get
+#' 
+#' @return Character containing HTTP response
+#' @noRd
+#' 
+get_url_content <- function(url) {
+
+  # check setting for SSL verification
+  use_ssl_verification <- get_ssl_verify()
+
+  if (use_ssl_verification) {
+    response <- GET(url)
+  } else {
+    response <- GET(
+      url,
+      httr::config(ssl_verifypeer = 0)
+    )
+  }
+
+  # return raw content from the response
+  return(content(response, as = "text", encoding = "UTF-8"))
+}

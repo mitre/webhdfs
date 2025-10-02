@@ -14,7 +14,7 @@ test_that("hdfs_get works with LISTSTATUS and valid path", {
     },
 
     # mockup exception error when file not found
-    content = function(x, ...) {
+    get_url_content = function(x, ...) {
       return(
         paste0(
           "{\"FileStatuses\":{\"FileStatus\":[\n{\"accessTime\":0,\"blockSize\":0,\"childrenNum\":1,",
@@ -35,7 +35,7 @@ test_that("hdfs_get throws warning with invalid path", {
     expect_warning(hdfs_get("/", "LISTSTATUS")),
 
     # mockup exception error when file not found
-    content = function(x, ...) {
+    get_url_content = function(x, ...) {
       return(
         paste0(
           "{\"RemoteException\":{\"exception\":\"FileNotFoundException\",",
