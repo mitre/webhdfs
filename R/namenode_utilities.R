@@ -87,8 +87,7 @@ is_namenode_active <- function(webhdfs_url) {
                       "?user.name=", get_user(),
                       "&op=LISTSTATUS")
 
-  test_content <- content(GET(test_url),
-                          as = "text", encoding = "UTF-8")
+  test_content <- get_url_content(test_url)
 
   # protect against non-json result
   if (!validate(test_content)) {

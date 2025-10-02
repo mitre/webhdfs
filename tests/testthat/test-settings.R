@@ -201,3 +201,18 @@ default:
   expect_equal(get_webhdfs_suffix(), "webhdfs/v1")
 })
 
+
+test_that("SSL verification is used by default", {
+  # no value to start
+  reset_cache()
+  expect_true({get_ssl_verify()})
+})
+
+
+test_that("turning off SSL verification works", {
+  # no value to start
+  reset_cache()
+
+  expect_silent({set_ssl_verify(FALSE)})
+  expect_false({get_ssl_verify()})
+})

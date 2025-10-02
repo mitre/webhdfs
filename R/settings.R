@@ -178,3 +178,27 @@ guess_user <- function(){
   else
     return(tolower(Sys.getenv("USER")))
 }
+
+
+#' @param verify Logical indicator of whether to use SSL verification
+#' @export
+#' @rdname webhdfs.defaults
+set_ssl_verify <- function(verify = TRUE) {
+  if (is.logical(verify))
+    set_var("webhdfs.sslverify", verify)
+  else
+    stop("Expected TRUE or FALSE for whether to use SSL verification in curl requests")
+}
+
+#' @export
+#' @rdname webhdfs.defaults
+get_ssl_verify <- function() {
+  tmp_verify <- get_setting("webhdfs.sslverify", NULL, allow_null = TRUE, setter = set_ssl_verify)
+
+  # default to TRUE if not set
+  if (is.null(tmp_verify))
+    return(TRUE)
+  else 
+    return(tmp_verify)
+}
+

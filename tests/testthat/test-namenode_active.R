@@ -5,7 +5,7 @@ test_that("standby namenode is detected correctly", {
     expect_false(is_namenode_active("http://fakeurl")),
 
     # mockup exception error from standby
-    content = function(x, ...) {
+    get_url_content = function(x, ...) {
       return(
         paste0(
           "{\"RemoteException\":{\"exception\":\"StandbyException\",",
@@ -22,7 +22,7 @@ test_that("active namenode is detected correctly", {
     expect_true(is_namenode_active("http://fakeurl")),
 
     # mockup valid response from active namenode
-    content = function(x, ...) {
+    get_url_content = function(x, ...) {
       return("{\"FileStatuses\":{\"FileStatus\":[\n\n]}}\n")
       }
   )
@@ -36,7 +36,7 @@ test_that("is_namenode_active gives helpful error message when WebHDFS is not en
                  "WebHDFS is not available at the requested url"),
 
     # mockup 404 error from invalid webhdfs server
-    content = function(x, ...) {
+    get_url_content = function(x, ...) {
       return(
         paste0(
           '<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\"/>\n',
