@@ -22,6 +22,10 @@
 #'         of the computer user name. This should work for most people, but not all.
 #'         If you are one of the lucky ones maintaining multiple (different) usernames
 #'         then you should set this parameter before trying to use this package.}
+#'   \item{webhdfs.sslverify}{Indicates whether to use SSL verification in GET requests.  
+#'         For example, if there is a self-signed certificate in the chain it may be 
+#'         necessary to set this to \code{FALSE}.  Doing so is the equivalent of issuing 
+#'         a \code{curl} command with the \code{--insecure} option.}
 #' }
 #'
 #' @param return_type character string, must be one of \code{"data.frame", "data.table", "tbl"}

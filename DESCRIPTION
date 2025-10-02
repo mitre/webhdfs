@@ -1,6 +1,6 @@
 Package: webhdfs
 Title: Interface with WebHDFS Service in a Cluster-Neutral Way
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Brendan", "Hogan", email = "bhogan@mitre.org", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4010-5224")),
     person(family = "The MITRE Corporation", email = "opensource@mitre.org", role = c("cph", "fnd"))
